@@ -1,0 +1,70 @@
+/* Utility functions */
+export function formatDate(dateStr) {
+  if (!dateStr) return '—';
+  const d = new Date(dateStr);
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+export function formatTime(seconds) {
+  if (!seconds) return '0:00';
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+export function formatTimeMinutes(seconds) {
+  if (!seconds) return '0 min';
+  const m = Math.floor(seconds / 60);
+  return m <= 0 ? `${seconds}s` : `${m} min`;
+}
+
+export function getGreeting() {
+  const h = new Date().getHours();
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  return 'Good evening';
+}
+
+export function getInitials(name) {
+  if (!name) return '?';
+  return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+}
+
+export function gameTypeName(type) {
+  const m = { 
+    target_touch: 'Target Touch', 
+    object_catch: 'Object Catch', 
+    path_following: 'Path Following',
+    bubble_pop: 'Bubble Pop',
+    number_show: 'Number Showing',
+    thumb_touch: 'Thumb Touch'
+  };
+  return m[type] || type;
+}
+
+export function gameTypeIcon(type) {
+  const m = { 
+    target_touch: '🎯', 
+    object_catch: '🧺', 
+    path_following: '✏️',
+    bubble_pop: '🫧',
+    number_show: '🔢',
+    thumb_touch: '🖐️'
+  };
+  return m[type] || '🎮';
+}
+
+export function debounce(fn, ms = 300) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
+export function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+export function todayStr() {
+  return new Date().toISOString().slice(0, 10);
+}

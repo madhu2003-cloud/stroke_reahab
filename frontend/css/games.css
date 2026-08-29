@@ -1,0 +1,116 @@
+/* ===== GAME PAGES ===== */
+.game-select-page {
+  padding: 0;
+}
+.game-select-header {
+  text-align: center; margin-bottom: 40px;
+}
+.game-select-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+}
+.game-select-card {
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.5); border-radius: var(--radius-xl);
+  overflow: hidden; transition: var(--transition); box-shadow: var(--shadow);
+}
+.game-select-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.game-select-visual {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; position: relative;
+}
+.game-select-visual.v1 { background: linear-gradient(135deg, #6C63FF15, #6C63FF08); }
+.game-select-visual.v2 { background: linear-gradient(135deg, #00D2FF15, #00D2FF08); }
+.game-select-visual.v3 { background: linear-gradient(135deg, #FF658415, #FF658408); }
+.game-select-body {
+  padding: 24px;
+}
+.game-select-body h3 { margin-bottom: 8px; }
+.game-select-body p { font-size: 0.9rem; margin-bottom: 16px; min-height: 60px; }
+.game-select-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; font-size: 0.8rem; color: var(--text-light);
+}
+
+/* Game Play Page */
+.game-play-page {
+  display: flex; flex-direction: column; height: calc(100vh - 64px);
+  padding: 0;
+}
+.game-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(10px); border-bottom: 1px solid #E5E7EB;
+}
+.game-toolbar h3 { font-size: 1rem; }
+.game-toolbar-actions { display: flex; gap: 8px; }
+.game-mode-toggle {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; color: var(--text-secondary);
+}
+
+.game-canvas-container {
+  flex: 1; position: relative; overflow: hidden;
+  background: #0a0a1a;
+}
+.game-canvas-container canvas {
+  display: block; width: 100%; height: 100%;
+}
+.game-video-feed {
+  position: absolute; bottom: 16px; right: 16px;
+  width: 160px; border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg); z-index: 10;
+}
+
+/* Game Pre-start */
+.game-prestart {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.7); z-index: 20;
+}
+.game-prestart-card {
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(16px);
+  border-radius: var(--radius-xl); padding: 40px;
+  max-width: 500px; width: 90%; text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+.game-prestart-card .game-icon { font-size: 4rem; margin-bottom: 16px; }
+.game-prestart-card h2 { margin-bottom: 12px; }
+.game-prestart-card p { margin-bottom: 24px; font-size: 0.95rem; }
+.game-prestart-card .game-instructions {
+  text-align: left; background: #F8F9FA; padding: 16px;
+  border-radius: var(--radius-md); margin-bottom: 24px;
+  font-size: 0.85rem; line-height: 1.8;
+}
+
+/* Game Results Overlay */
+.game-results-overlay {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.75); z-index: 20;
+}
+.game-results-card {
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(16px);
+  border-radius: var(--radius-xl); padding: 40px;
+  max-width: 500px; width: 90%; text-align: center;
+  animation: fadeIn 0.4s ease;
+}
+.game-results-card .results-icon { font-size: 3rem; margin-bottom: 12px; }
+.game-results-card h2 { margin-bottom: 24px; }
+.results-stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin-bottom: 24px;
+}
+.result-stat {
+  padding: 12px; background: #F8F9FA; border-radius: var(--radius-md);
+}
+.result-stat .result-val { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+.result-stat .result-lbl { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; }
+.game-results-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* Camera Permission */
+.camera-permission {
+  text-align: center; padding: 40px;
+}
+.camera-permission i { font-size: 3rem; color: var(--warning); margin-bottom: 16px; }
+.camera-permission h3 { margin-bottom: 8px; }
+.camera-permission p { margin-bottom: 20px; }
