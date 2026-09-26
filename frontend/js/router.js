@@ -14,6 +14,13 @@ import renderStreakPage, { initStreakPage } from './pages/streakPage.js';
 import renderProfile, { initProfile } from './pages/profile.js';
 import renderSettings, { initSettings } from './pages/settings.js';
 import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js';
+import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js';
+import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js';
+import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js';
+import renderSosPage, { initSosPage } from './pages/sosPage.js';
+import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js';
+import renderExportReport, { initExportReport } from './pages/exportReport.js';
+import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js';
 import { renderSidebar, initSidebar } from './components/sidebar.js';
 
 export default class Router {
@@ -146,15 +153,20 @@ export function setupRouter() {
   router.addRoute('#/profile', renderProfile, initProfile, { protected: true, withSidebar: true });
   router.addRoute('#/settings', renderSettings, initSettings, { protected: true, withSidebar: true });
   
-  // Patient specific
+  // Streak & Patient Detail
   router.addRoute('#/streak', renderStreakPage, initStreakPage, { protected: true, role: 'patient', withSidebar: true });
-  
-  // Parent specific
-  router.addRoute('#/my-patient', () => '<div id="parent-pat-content"></div>', initParentDashboard, { protected: true, role: 'parent', withSidebar: true }); // Reuse parent dashboard
-  
-  // Doctor specific
-  router.addRoute('#/patients', renderDoctorDashboard, initDoctorDashboard, { protected: true, role: 'doctor', withSidebar: true }); // Reuse doctor dashboard for list
-  router.addRoute('#/patients/:id', renderPatientDetail, initPatientDetail, { protected: true, withSidebar: true }); // Doctor/Parent
+  router.addRoute('#/my-patient', () => '<div id="parent-pat-content"></div>', initParentDashboard, { protected: true, role: 'parent', withSidebar: true });
+  router.addRoute('#/patients', renderDoctorDashboard, initDoctorDashboard, { protected: true, role: 'doctor', withSidebar: true });
+  router.addRoute('#/patients/:id', renderPatientDetail, initPatientDetail, { protected: true, withSidebar: true });
+
+  // New Advanced Clinical & Recovery Features
+  router.addRoute('#/ai-advisor', renderAiAdvisor, initAiAdvisor, { protected: true, withSidebar: true });
+  router.addRoute('#/rom-analyzer', renderRomAnalyzer, initRomAnalyzer, { protected: true, withSidebar: true });
+  router.addRoute('#/speech-therapy', renderSpeechTherapy, initSpeechTherapy, { protected: true, withSidebar: true });
+  router.addRoute('#/sos', renderSosPage, initSosPage, { protected: true, withSidebar: true });
+  router.addRoute('#/prescriptions', renderPrescriptionsPage, initPrescriptionsPage, { protected: true, withSidebar: true });
+  router.addRoute('#/export-report', renderExportReport, initExportReport, { protected: true, withSidebar: true });
+  router.addRoute('#/cheering', renderCheeringPage, initCheeringPage, { protected: true, withSidebar: true });
 
   return router;
 }
