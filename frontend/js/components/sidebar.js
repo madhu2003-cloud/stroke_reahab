@@ -16,6 +16,7 @@ const navItems = {
     { icon: 'fa-clipboard-list', label: 'History', route: '#/history' },
     { icon: 'fa-file-pdf', label: 'Clinical Report', route: '#/export-report' },
     { icon: 'fa-exclamation-triangle', label: 'Emergency SOS', route: '#/sos' },
+    { icon: 'fa-star', label: 'Give Feedback', route: '#/feedback' },
     { icon: 'fa-user', label: 'Profile', route: '#/profile' },
     { icon: 'fa-cog', label: 'Settings', route: '#/settings' },
   ],

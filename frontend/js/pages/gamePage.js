@@ -39,9 +39,10 @@ export default function renderGamePage(params) {
             <h2>Exercise Session Complete!</h2>
             <p style="color:var(--text-secondary);font-size:14px;margin-bottom:16px">Your motor kinematics and repetition data have been logged.</p>
             <div class="results-stats" id="results-stats-container"></div>
-            <div class="game-results-actions" style="margin-top:20px;display:flex;gap:12px;justify-content:center">
-              <button class="btn btn-primary" id="play-again-btn">Repeat Exercise</button>
-              <button class="btn btn-secondary" onclick="window.location.hash='#/games'">Choose Next Module</button>
+            <div class="game-results-actions" style="margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+              <button class="btn btn-primary" id="play-again-btn"><i class="fas fa-redo"></i> Repeat Exercise</button>
+              <button class="btn btn-secondary" onclick="window.location.hash='#/feedback'" style="background:#fef3c7;color:#b45309;border-color:#fde68a;font-weight:700;"><i class="fas fa-star" style="color:#f59e0b;"></i> Give Your Feedback</button>
+              <button class="btn btn-ghost" onclick="window.location.hash='#/games'">Choose Next Module</button>
             </div>
           </div>
         </div>

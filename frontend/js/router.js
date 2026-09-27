@@ -21,6 +21,7 @@ import renderSosPage, { initSosPage } from './pages/sosPage.js?v=5.0';
 import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=5.0';
 import renderExportReport, { initExportReport } from './pages/exportReport.js?v=5.0';
 import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=5.0';
+import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=6.0';
 import { renderSidebar, initSidebar } from './components/sidebar.js';
 
 export default class Router {
@@ -167,6 +168,7 @@ export function setupRouter() {
   router.addRoute('#/prescriptions', renderPrescriptionsPage, initPrescriptionsPage, { protected: true, withSidebar: true });
   router.addRoute('#/export-report', renderExportReport, initExportReport, { protected: true, withSidebar: true });
   router.addRoute('#/cheering', renderCheeringPage, initCheeringPage, { protected: true, withSidebar: true });
+  router.addRoute('#/feedback', renderFeedbackPage, initFeedbackPage, { protected: true, withSidebar: true });
 
   return router;
 }

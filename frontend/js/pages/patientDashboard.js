@@ -12,6 +12,20 @@ export default function renderPatientDashboard() {
       <p class="welcome-date" id="dash-date">Ready for today's rehabilitation session?</p>
     </div>
     
+    <div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#ffffff;padding:18px 24px;border-radius:16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:0 8px 20px rgba(79,70,229,0.25);">
+      <div>
+        <div style="font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px;">
+          <i class="fas fa-star" style="color:#facc15;"></i> Testing our Platform? Share Your Experience!
+        </div>
+        <div style="font-size:0.88rem;opacity:0.9;margin-top:2px;">
+          Answer 6 quick multiple-choice questions & tell us what changes you want us to add!
+        </div>
+      </div>
+      <a href="#/feedback" class="btn" style="background:#ffffff;color:#4f46e5;font-weight:700;border-radius:10px;padding:10px 20px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+        Give Feedback ⭐
+      </a>
+    </div>
+    
     <div id="dash-content">
       <div id="stats-container" class="stats-row"></div>
       
