@@ -1,4 +1,4 @@
-/* AI Recovery Coach & Clinical Advisor Page - Domain Guardrailed Clinical AI */
+/* AI Recovery Coach & Clinical Advisor Page - Comprehensive Dynamic Medical Assistant */
 import Auth from '../auth.js';
 import Toast from '../components/toast.js';
 
@@ -29,21 +29,21 @@ export default function renderAiAdvisor() {
 
       <!-- Quick Tips Grid -->
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:24px;">
-        <div class="card" style="padding:16px;border-left:4px solid #3b82f6;cursor:pointer;" onclick="window.sendQuickPrompt('What exercises should I do today for hand stiffness?')">
-          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#1e40af;"><i class="fas fa-hand-sparkles"></i> Hand Stiffness Relief</div>
-          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">Ask for personalized finger and wrist mobility routines.</div>
+        <div class="card" style="padding:16px;border-left:4px solid #3b82f6;cursor:pointer;" onclick="window.sendQuickPrompt('What are all the exercises and games available on this platform?')">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#1e40af;"><i class="fas fa-dumbbell"></i> List All Exercises</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">View the complete suite of 6 clinical rehabilitation modules.</div>
         </div>
-        <div class="card" style="padding:16px;border-left:4px solid #10b981;cursor:pointer;" onclick="window.sendQuickPrompt('How can I improve my movement smoothness and reduce tremors?')">
-          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#065f46;"><i class="fas fa-wave-square"></i> Tremor & Smoothness</div>
-          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">Techniques for ataxia, spasticity, and coordination.</div>
+        <div class="card" style="padding:16px;border-left:4px solid #10b981;cursor:pointer;" onclick="window.sendQuickPrompt('Give me a personalized daily recovery plan')">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#065f46;"><i class="fas fa-calendar-alt"></i> Daily Recovery Plan</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">Morning, afternoon, and evening therapy routine.</div>
         </div>
-        <div class="card" style="padding:16px;border-left:4px solid #8b5cf6;cursor:pointer;" onclick="window.sendQuickPrompt('Give me a personalized daily recovery plan')">
-          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#5b21b6;"><i class="fas fa-calendar-alt"></i> Daily Recovery Plan</div>
-          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">Get morning, afternoon, and evening therapy routines.</div>
+        <div class="card" style="padding:16px;border-left:4px solid #8b5cf6;cursor:pointer;" onclick="window.sendQuickPrompt('How do these exercises help my recovery in real life?')">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#5b21b6;"><i class="fas fa-hand-holding-heart"></i> Real-Life Benefits</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">How movements map to opening doors, typing, and eating.</div>
         </div>
-        <div class="card" style="padding:16px;border-left:4px solid #f59e0b;cursor:pointer;" onclick="window.sendQuickPrompt('What are signs of physical fatigue during stroke rehab?')">
-          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#92400e;"><i class="fas fa-battery-half"></i> Fatigue Monitoring</div>
-          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">Identify when to rest and prevent overexertion.</div>
+        <div class="card" style="padding:16px;border-left:4px solid #f59e0b;cursor:pointer;" onclick="window.sendQuickPrompt('How can I reduce hand stiffness and open my fingers?')">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:4px;color:#92400e;"><i class="fas fa-hand-sparkles"></i> Hand & Finger Tips</div>
+          <div style="font-size:0.8rem;color:var(--text-secondary,#6b7280);">Techniques for spasticity, clenched fists, and pinch grip.</div>
         </div>
       </div>
 
@@ -65,7 +65,7 @@ export default function renderAiAdvisor() {
           </div>
           <div>
             <span class="badge" style="background:#dcfce7;color:#15803d;padding:4px 12px;border-radius:99px;font-size:0.78rem;font-weight:700;">
-              🩺 Clinical AI Guardrails Active
+              🩺 Clinical AI Active
             </span>
           </div>
         </div>
@@ -78,15 +78,17 @@ export default function renderAiAdvisor() {
               <i class="fas fa-robot"></i>
             </div>
             <div style="background:#ffffff;padding:14px 18px;border-radius:16px;border:1px solid var(--border-color,#e5e7eb);box-shadow:0 2px 6px rgba(0,0,0,0.04);font-size:0.92rem;line-height:1.6;color:var(--text-primary,#111827);">
-              Hello ${user.name || 'there'}! 👋 I am your dedicated <strong>AI Stroke Rehabilitation Coach</strong>. I am strictly specialized to help you with:
+              Hello ${user.name || 'there'}! 👋 I am your dedicated <strong>AI Stroke Rehabilitation Coach</strong>.<br/><br/>
+              I can help you with:
               <ul style="margin:8px 0 0 16px;padding:0;">
-                <li>Personalized motor, speech, and finger mobility exercises</li>
-                <li>Daily and weekly stroke recovery routines & schedules</li>
-                <li>Explaining tremor control, ROM joint angles, and clinical games</li>
-                <li>Conducting quick <strong>F.A.S.T.</strong> stroke warning checks</li>
+                <li><strong>Listing all rehabilitation exercises & games</strong> available on the platform</li>
+                <li><strong>Creating your personalized daily recovery plan</strong> (morning, afternoon, evening)</li>
+                <li><strong>Explaining how each exercise helps</strong> with daily tasks like holding a spoon or turning keys</li>
+                <li><strong>Techniques for hand stiffness, tremors, shoulder reach, and speech therapy</strong></li>
+                <li><strong>F.A.S.T. emergency stroke safety checks</strong></li>
               </ul>
-              <em>(Note: I strictly answer stroke and physical rehabilitation questions.)</em><br/><br/>
-              How can I assist your rehabilitation today?
+              <br/>
+              <em>What would you like to ask me about your rehabilitation?</em>
             </div>
           </div>
         </div>
@@ -94,7 +96,7 @@ export default function renderAiAdvisor() {
         <!-- Chat Input Bar -->
         <div style="padding:16px;border-top:1px solid var(--border-color,rgba(0,0,0,0.08));background:#ffffff;">
           <form id="ai-chat-form" style="display:flex;gap:10px;">
-            <input type="text" id="ai-chat-input" class="inp" placeholder="Ask about stroke exercises, stiffness, recovery plan, ROM, fatigue..." style="flex:1;padding:12px 16px;border-radius:12px;font-size:0.92rem;" autocomplete="off" />
+            <input type="text" id="ai-chat-input" class="inp" placeholder="Ask about available exercises, recovery plan, hand stiffness, ROM, speech..." style="flex:1;padding:12px 16px;border-radius:12px;font-size:0.92rem;" autocomplete="off" />
             <button type="submit" class="btn btn-primary" style="border-radius:12px;padding:0 20px;display:flex;align-items:center;gap:6px;">
               <span>Send</span> <i class="fas fa-paper-plane"></i>
             </button>
@@ -134,32 +136,33 @@ export function initAiAdvisor() {
     scrollToBottom();
   };
 
-  // Domain Relevance Classifier
+  // Domain Classifier
   const REHAB_TOPICS = [
-    'stroke', 'rehab', 'recovery', 'physio', 'therapy', 'exercise', 'hand', 'arm', 'finger', 'wrist',
-    'shoulder', 'elbow', 'leg', 'walk', 'mobility', 'stiff', 'spastic', 'tremor', 'ataxia', 'shake',
-    'fast', 'symptom', 'warning', 'pain', 'fatigue', 'tired', 'rest', 'sleep', 'speech', 'voice',
-    'aphasia', 'dysarthria', 'face', 'droop', 'smile', 'swallow', 'rom', 'angle', 'motion', 'game',
-    'pegboard', 'piano', 'shelf', 'window', 'knob', 'routine', 'plan', 'schedule', 'doctor', 'patient',
-    'neuroplasticity', 'brain', 'muscle', 'clench', 'fist', 'pinch', 'grip', 'stretch', 'improve',
-    'progress', 'score', 'streak', 'help', 'hi', 'hello', 'hey', 'thank', 'who are you', 'what can you do'
+    'stroke', 'rehab', 'recovery', 'physio', 'therapy', 'exercise', 'game', 'module', 'hand', 'arm',
+    'finger', 'wrist', 'shoulder', 'elbow', 'leg', 'walk', 'mobility', 'stiff', 'spastic', 'tremor',
+    'ataxia', 'shake', 'fast', 'symptom', 'warning', 'pain', 'fatigue', 'tired', 'rest', 'sleep',
+    'speech', 'voice', 'aphasia', 'dysarthria', 'face', 'droop', 'smile', 'swallow', 'rom', 'angle',
+    'motion', 'pegboard', 'piano', 'shelf', 'window', 'knob', 'routine', 'plan', 'schedule', 'doctor',
+    'patient', 'neuroplasticity', 'brain', 'muscle', 'clench', 'fist', 'pinch', 'grip', 'stretch',
+    'improve', 'progress', 'score', 'streak', 'help', 'hi', 'hello', 'hey', 'thank', 'who are you',
+    'what can you do', 'what do you have', 'what are the exercises', 'list', 'show', 'all'
   ];
 
   function isDomainRelated(query) {
     const q = query.toLowerCase().trim();
-    if (q === 'hi' || q === 'hello' || q === 'hey' || q === 'thanks' || q === 'thank you') return true;
+    if (/^(hi|hello|hey|thanks|thank you|ok|okay)\b/.test(q)) return true;
     return REHAB_TOPICS.some(t => q.includes(t));
   }
 
-  // Call Server or Client AI with Guardrail
+  // Smart Query Dispatcher
   async function queryAiAdvisor(promptText) {
-    // 1. Client Guardrail Check
+    // 1. Guardrail Check
     if (!isDomainRelated(promptText) && promptText.trim().split(/\s+/).length > 2) {
       return `I am your dedicated <strong>Stroke Rehabilitation & Clinical Recovery AI Coach</strong>. I am specialized strictly in stroke recovery, physical therapy exercises, motor relearning, and wellness.<br/><br/>
       Please ask a question related to your stroke rehabilitation, exercises, or recovery routine! 🩺`;
     }
 
-    // 2. Query Server Endpoint
+    // 2. Try Backend AI Endpoint
     try {
       const resp = await fetch('/api/ai/chat', {
         method: 'POST',
@@ -177,7 +180,7 @@ export function initAiAdvisor() {
         }
       }
     } catch (e) {
-      // Backend failed, fallback to contextual clinical resolver
+      // Backend not available, use clinical engine
     }
 
     return getContextualClinicalResponse(promptText);
@@ -186,67 +189,97 @@ export function initAiAdvisor() {
   function getContextualClinicalResponse(query) {
     const q = query.trim().toLowerCase();
 
-    // Off-topic check
+    // ── 0. Off-Topic Rejection ──
     if (!isDomainRelated(query)) {
       return `I am your dedicated <strong>Stroke Rehabilitation & Clinical Recovery AI Coach</strong>. I am specialized strictly in stroke recovery, physical therapy exercises, motor relearning, and wellness.<br/><br/>
       Please ask a question related to your stroke rehabilitation, exercises, or recovery routine! 🩺`;
     }
 
-    // Greetings
-    if (/^(hi|hello|hey|greetings|good\s*(morning|afternoon|evening))\b/.test(q)) {
-      return `👋 Hello! I am your <strong>AURA AI Rehabilitation Coach</strong>. I am ready to guide your physical therapy, recommend exercises, or explain your recovery metrics. How can I help your recovery today?`;
+    // ── 1. List All Available Exercises / Games ──
+    if (
+      (q.includes('what') && (q.includes('exercise') || q.includes('game') || q.includes('module') || q.includes('have') || q.includes('available'))) ||
+      q.includes('list') || q.includes('show exercises') || q.includes('all exercises') || q.includes('which exercises') || q.includes('what games')
+    ) {
+      return `🏋️ <strong>We Have 6 Evidence-Based Clinical Rehabilitation Modules:</strong><br/><br/>
+      1. 🎹 <strong>Virtual Piano Finger Independence</strong> (Hand & Fingers)<br/>
+      • <em>Goal:</em> Forces you to press 1 finger at a time (Thumb to Pinky) to overcome clenched-fist synergy.<br/><br/>
+      2. 🔐 <strong>Forearm Pronation & Supination Lab</strong> (Wrist & Forearm)<br/>
+      • <em>Goal:</em> Rotate your wrist left and right to turn a 3D vault knob (helps opening doors and bottle caps).<br/><br/>
+      3. 📌 <strong>9-Hole Pegboard Pincer Test</strong> (Fine Dexterity)<br/>
+      • <em>Goal:</em> Pinch small pegs with thumb & index finger to transfer into target holes (helps buttoning shirts and holding pens).<br/><br/>
+      4. 🗄️ <strong>Shelf Reaching & Stacking</strong> (Shoulder & Elbow)<br/>
+      • <em>Goal:</em> Reach down and lift items overhead onto high shelves (stretches tight bicep contractures).<br/><br/>
+      5. 🪟 <strong>Planar Window & Surface Sweep</strong> (Arm Coordination)<br/>
+      • <em>Goal:</em> Perform wide circular and horizontal sweeping strokes to wipe away steam (loosens stiff chest & shoulder muscles).<br/><br/>
+      6. 🪞 <strong>Facial Symmetry Biofeedback</strong> (Facial Droop & Speech)<br/>
+      • <em>Goal:</em> Guides symmetrical smiles, brow raises, and lip puckers in the camera mirror to rebuild facial nerve tone.<br/><br/>
+      👉 <em>You can access all of them anytime by clicking <strong>Rehab Games</strong> in the sidebar!</em>`;
     }
 
-    // Recovery Plan / Routine
-    if (q.includes('plan') || q.includes('routine') || q.includes('schedule') || q.includes('program') || (q.includes('how') && q.includes('recovery'))) {
+    // ── 2. How Exercises Help in Real Life ──
+    if (q.includes('how') && (q.includes('help') || q.includes('work') || q.includes('cure') || q.includes('benefit') || q.includes('improve'))) {
+      return `🌟 <strong>How These Exercises Help You In Real Daily Life:</strong><br/><br/>
+      After a stroke, the brain loses connection with muscles. Repeating these exercises forces the brain to build <strong>new neural wiring</strong> (neuroplasticity):<br/><br/>
+      • <strong>Piano Tapping:</strong> Helps you open your fingers to <strong>type on a phone</strong> and <strong>hold a spoon</strong>.<br/>
+      • <strong>Knob Turning:</strong> Rebuilds wrist twist to <strong>turn door keys</strong> and <strong>open water taps</strong>.<br/>
+      • <strong>Pegboard Pinch:</strong> Restores pincer grip to <strong>button your shirt</strong> and <strong>hold a pen</strong>.<br/>
+      • <strong>Shelf Reach:</strong> Stretches tight arms to <strong>reach cupboard cups</strong> and <strong>comb your hair</strong>.<br/>
+      • <strong>Window Sweep:</strong> Relieves shoulder stiffness to <strong>wipe tables</strong> and <strong>bathe comfortably</strong>.<br/>
+      • <strong>Facial Mirror:</strong> Rebuilds facial strength to <strong>speak clearly</strong> and <strong>drink without spilling</strong>.`;
+    }
+
+    // ── 3. Recovery Plan & Schedule ──
+    if (q.includes('plan') || q.includes('schedule') || q.includes('routine') || q.includes('program') || q.includes('regimen') || q.includes('daily')) {
       return `📅 <strong>Your Personalized Daily Stroke Recovery Plan:</strong><br/><br/>
       Physiotherapists recommend <strong>3 short sessions of 15 minutes</strong> daily to drive neuroplasticity without muscle exhaustion:<br/><br/>
-      🌅 <strong>Morning (15 mins) — Fine Motor Control:</strong><br/>
-      • <em>Piano Finger Independence:</em> 2 sets to isolate single fingers and overcome clenched fists.<br/>
-      • <em>9-Hole Pegboard Pinch:</em> 2 sets to strengthen thumb-index pincer grip.<br/><br/>
+      🌅 <strong>Morning (15 mins) — Fine Motor & Fingers:</strong><br/>
+      • 5 mins warm towel compress on your hand.<br/>
+      • 2 rounds of <em>Piano Finger Independence</em>.<br/>
+      • 2 rounds of <em>9-Hole Pegboard Pincer Test</em>.<br/><br/>
       ☀️ <strong>Afternoon (15 mins) — Arm & Shoulder Reach:</strong><br/>
-      • <em>Forearm Knob Turning:</em> 2 sets to restore wrist rotation for door handles and faucets.<br/>
-      • <em>Shelf Reaching:</em> 2 sets of overhead reaching to stretch tight bicep muscles.<br/>
-      • <em>Planar Window Sweep:</em> 1 set for wide, smooth arm sweeps.<br/><br/>
-      🌙 <strong>Evening (15 mins) — Speech & Facial Therapy:</strong><br/>
-      • <em>Facial Symmetry Mirror:</em> 1 set of smile, brow, and lip pucker exercises.<br/>
-      • <em>Speech Therapy Lab:</em> 5 mins of vowel and word pronunciation practice.<br/>
-      • <em>ROM & Tremor Lab:</em> Test your joint angles to log your progress!`;
+      • 2 rounds of <em>Forearm Knob & Key Turning</em>.<br/>
+      • 2 rounds of <em>Shelf Reaching & Stacking</em>.<br/>
+      • 1 round of <em>Planar Window Sweep</em>.<br/><br/>
+      🌙 <strong>Evening (15 mins) — Speech, Face & Progress Test:</strong><br/>
+      • 1 round of <em>Facial Symmetry Biofeedback</em>.<br/>
+      • 5 mins in the <em>Speech Therapy Lab</em>.<br/>
+      • Test joint angles in <em>ROM & Tremor Lab</em> to log your recovery streak! 🔥`;
     }
 
-    // Hand Stiffness / Fingers / Wrist
-    if (q.includes('stiff') || q.includes('hand') || q.includes('finger') || q.includes('pinch') || q.includes('wrist') || q.includes('grip') || q.includes('fist')) {
+    // ── 4. Hand Stiffness / Clenched Fist / Fingers ──
+    if (q.includes('stiff') || q.includes('hand') || q.includes('finger') || q.includes('clench') || q.includes('fist') || q.includes('pinch') || q.includes('wrist') || q.includes('grip')) {
       return `🤲 <strong>Hand & Finger Mobility Recommendations:</strong><br/>
-      1. <strong>Warm Towel Compress (5 mins):</strong> Relaxes tight, spastic hand muscles.<br/>
+      1. <strong>Warm Towel Compress (5 mins):</strong> Apply gentle warmth to relax tight spastic finger flexors.<br/>
       2. <strong>Piano Finger Independence:</strong> Play in the <em>Rehab Games</em> tab to practice opening one finger at a time.<br/>
       3. <strong>9-Hole Pegboard Pinch:</strong> Practice picking up and releasing pegs to rebuild fine grip for spoons and buttons.<br/>
-      4. <strong>Forearm Knob Turn:</strong> Rebuild wrist rotation to turn keys and open bottle caps.`;
+      4. <strong>Forearm Knob Turn:</strong> Rebuild wrist rotation to turn keys and open bottle caps.<br/>
+      5. <strong>Check ROM Lab:</strong> Measure your live finger pinch span in millimeters in the <em>ROM & Tremor Lab</em>.`;
     }
 
-    // Arm / Shoulder / Reaching
+    // ── 5. Arm / Shoulder / Reaching ──
     if (q.includes('arm') || q.includes('shoulder') || q.includes('elbow') || q.includes('reach') || q.includes('lift')) {
       return `💪 <strong>Upper Limb & Shoulder Strengthening:</strong><br/>
-      • <strong>Shelf Reaching & Stacking:</strong> Practice overhead arm elevation to counter bicep contractures.<br/>
+      • <strong>Shelf Reaching & Stacking:</strong> Practice overhead arm elevation ($120^\circ \to 160^\circ$) to counter bicep contractures.<br/>
       • <strong>Planar Window Sweep:</strong> Wide sweeping motions stretch stiff chest and shoulder muscles.<br/>
       • <strong>Bilateral Mirroring:</strong> Use your unaffected arm to guide your recovering arm in synchronized reaches.`;
     }
 
-    // Tremor / Jitter / Smoothness
+    // ── 6. Tremor / Shaking / Jitter ──
     if (q.includes('tremor') || q.includes('smooth') || q.includes('shake') || q.includes('jerk') || q.includes('ataxia')) {
       return `🌊 <strong>Tremor Reduction & Motor Smoothness:</strong><br/>
       • Practice slow, rhythmic arm sweeps in <em>Planar Window Sweep</em> to retrain cerebellar coordination.<br/>
-      • Open the <strong>ROM & Tremor Lab</strong> tab to measure your tremor frequency and spectral power.<br/>
+      • Open the <strong>ROM & Tremor Lab</strong> tab to measure your tremor frequency and spectral power in real time.<br/>
       • Rest if muscle fatigue sets in, as fatigue increases motor tremor.`;
     }
 
-    // Speech / Facial droop
-    if (q.includes('speech') || q.includes('face') || q.includes('droop') || q.includes('talk') || q.includes('voice') || q.includes('smile')) {
+    // ── 7. Speech / Facial Droop ──
+    if (q.includes('speech') || q.includes('face') || q.includes('droop') || q.includes('talk') || q.includes('voice') || q.includes('smile') || q.includes('swallow')) {
       return `🗣️ <strong>Speech & Facial Neuromuscular Re-education:</strong><br/>
       • Play <strong>Facial Symmetry Biofeedback</strong> in the <em>Rehab Games</em> tab to strengthen facial nerve control.<br/>
       • Visit the <strong>Speech Therapy Lab</strong> in the sidebar to practice vocal articulation and vowel sustainment.`;
     }
 
-    // F.A.S.T. Stroke Warning
+    // ── 8. F.A.S.T. Stroke Warning ──
     if (q.includes('fast') || q.includes('symptom') || q.includes('warning') || q.includes('emergency')) {
       return `🚨 <strong>F.A.S.T. Emergency Stroke Warning Checklist:</strong><br/>
       • <strong>F (Face Drooping):</strong> One side of face droops when smiling.<br/>
@@ -255,7 +288,7 @@ export function initAiAdvisor() {
       • <strong>T (Time to Call Emergency):</strong> Call 911 / 112 immediately if present!`;
     }
 
-    // Fatigue / Rest
+    // ── 9. Fatigue / Rest ──
     if (q.includes('fatigue') || q.includes('tired') || q.includes('rest') || q.includes('sleep') || q.includes('exhaust')) {
       return `⚡ <strong>Managing Therapy Fatigue:</strong><br/>
       • High frequency, short duration (three 15-min sessions) is far more effective than one long tiring session.<br/>
@@ -263,8 +296,22 @@ export function initAiAdvisor() {
       • Ensure 7-8 hours of nighttime sleep for brain neuroplastic consolidation.`;
     }
 
-    // Generic stroke question
-    return `🩺 <strong>Clinical Recovery Insight:</strong> For your stroke rehabilitation, maintaining consistent daily repetitions re-wires damaged neural circuits. You can practice fine motor exercises in the <strong>Rehab Games</strong> tab, check joint angles in the <strong>ROM & Tremor Lab</strong>, or ask me for specific guidance on any symptom!`;
+    // ── 10. Greetings & Friendly Replies ──
+    if (/^(hi|hello|hey|greetings|good\s*(morning|afternoon|evening))\b/.test(q) || q === 'hi' || q === 'hello') {
+      return `👋 Hello! I am your <strong>AURA AI Rehabilitation Coach</strong>. I am ready to guide your physical therapy, recommend exercises, or explain your recovery metrics. How can I help your recovery today?`;
+    }
+
+    if (q.includes('thank') || q.includes('thx') || q.includes('great') || q.includes('good') || q.includes('awesome')) {
+      return `🙏 You are very welcome! Keep up your wonderful dedication to daily therapy. Is there any other exercise or symptom you would like help with?`;
+    }
+
+    // ── 11. General Catch-All for Stroke Questions ──
+    return `🩺 <strong>Clinical Rehabilitation Guide:</strong><br/>
+    For your stroke recovery, you can:<br/>
+    1. Practice motor exercises in the <strong>Rehab Games</strong> tab (Piano Tapping, Pegboard, Knob Turn, Shelf Reach).<br/>
+    2. Check your joint angles and tremors in the <strong>ROM & Tremor Lab</strong>.<br/>
+    3. Practice speech clarity in the <strong>Speech Therapy Lab</strong>.<br/>
+    4. Ask me specifically about: <em>exercises, recovery plan, hand stiffness, tremors, or fatigue!</em>`;
   }
 
   form.onsubmit = async (e) => {
