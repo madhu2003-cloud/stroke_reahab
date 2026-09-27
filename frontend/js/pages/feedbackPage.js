@@ -34,165 +34,165 @@ export default function renderFeedbackPage() {
           <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0;" />
 
           <!-- MCQ 1: Overall Rating -->
-          <div style="margin-bottom:28px;">
+          <div class="mcq-group" id="group-q1" style="margin-bottom:28px;padding:14px;border-radius:14px;transition:all 0.3s;">
             <label style="display:block;font-weight:700;font-size:1.05rem;color:#1e293b;margin-bottom:12px;">
-              1. How would you rate your overall experience with the platform? ⭐
+              1. How would you rate your overall experience with the platform? ⭐ <span class="req-star" style="color:#ef4444;">*</span>
             </label>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;">
-                <input type="radio" name="q1_rating" value="5 Stars - Excellent" checked style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q1_rating" value="5 Stars - Excellent" style="accent-color:var(--primary,#4f46e5);" />
                 <span>⭐⭐⭐⭐⭐ <strong>Excellent (5/5)</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;">
-                <input type="radio" name="q1_rating" value="4 Stars - Good" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q1_rating" value="4 Stars - Good" style="accent-color:var(--primary,#4f46e5);" />
                 <span>⭐⭐⭐⭐ <strong>Good (4/5)</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;">
-                <input type="radio" name="q1_rating" value="3 Stars - Average" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q1_rating" value="3 Stars - Average" style="accent-color:var(--primary,#4f46e5);" />
                 <span>⭐⭐⭐ <strong>Average (3/5)</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;">
-                <input type="radio" name="q1_rating" value="2 Stars - Needs Improvement" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q1_rating" value="2 Stars - Needs Improvement" style="accent-color:var(--primary,#4f46e5);" />
                 <span>⭐⭐ <strong>Needs Work (2/5)</strong></span>
               </label>
             </div>
           </div>
 
           <!-- MCQ 2: Vision Tracking -->
-          <div style="margin-bottom:28px;">
+          <div class="mcq-group" id="group-q2" style="margin-bottom:28px;padding:14px;border-radius:14px;transition:all 0.3s;">
             <label style="display:block;font-weight:700;font-size:1.05rem;color:#1e293b;margin-bottom:12px;">
-              2. How smooth and responsive was the AI Camera Vision hand tracking? 📷
+              2. How smooth and responsive was the AI Camera Vision hand tracking? 📷 <span class="req-star" style="color:#ef4444;">*</span>
             </label>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q2_tracking" value="Very smooth & responsive" checked style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q2_tracking" value="Very smooth & responsive" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🟢 <strong>Very Smooth & Fast</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q2_tracking" value="Good (slight delay occasionally)" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q2_tracking" value="Good (slight delay occasionally)" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🟡 <strong>Good (slight delay)</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q2_tracking" value="Laggy or camera issues" style="accent-color:var(--primary);" />
-                <span>🔴 <strong>Laggy / Lighting issue</strong></span>
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q2_tracking" value="Laggy or camera issues" style="accent-color:var(--primary,#4f46e5);" />
+                <span>🔴 <strong>Laggy / Camera issue</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q2_tracking" value="Used Mouse / Touch mode" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q2_tracking" value="Used Mouse / Touch mode" style="accent-color:var(--primary,#4f46e5);" />
                 <span>⚪ <strong>Used Mouse / Touch</strong></span>
               </label>
             </div>
           </div>
 
           <!-- MCQ 3: Favorite Rehab Module -->
-          <div style="margin-bottom:28px;">
+          <div class="mcq-group" id="group-q3" style="margin-bottom:28px;padding:14px;border-radius:14px;transition:all 0.3s;">
             <label style="display:block;font-weight:700;font-size:1.05rem;color:#1e293b;margin-bottom:12px;">
-              3. Which clinical rehabilitation module did you find most engaging? 🎮
+              3. Which clinical rehabilitation module did you find most engaging? 🎮 <span class="req-star" style="color:#ef4444;">*</span>
             </label>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;">
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q3_module" value="Virtual Piano Finger Independence" checked style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q3_module" value="Virtual Piano Finger Independence" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🎹 <strong>Piano Finger Independence</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q3_module" value="Forearm Knob & Key Turning" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q3_module" value="Forearm Knob & Key Turning" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🔐 <strong>Forearm Knob & Rotation</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q3_module" value="9-Hole Pegboard Pincer Test" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q3_module" value="9-Hole Pegboard Pincer Test" style="accent-color:var(--primary,#4f46e5);" />
                 <span>📌 <strong>9-Hole Pegboard Pinch</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q3_module" value="Shelf Reaching & Stacking" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q3_module" value="Shelf Reaching & Stacking" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🗄️ <strong>Shelf Reaching & Stacking</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q3_module" value="Planar Window & Surface Sweep" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q3_module" value="Planar Window & Surface Sweep" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🪟 <strong>Planar Window Sweep</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q3_module" value="Facial Symmetry & Speech Lab" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q3_module" value="Facial Symmetry & Speech Lab" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🪞 <strong>Facial Symmetry & Speech</strong></span>
               </label>
             </div>
           </div>
 
           <!-- MCQ 4: AI Recovery Coach -->
-          <div style="margin-bottom:28px;">
+          <div class="mcq-group" id="group-q4" style="margin-bottom:28px;padding:14px;border-radius:14px;transition:all 0.3s;">
             <label style="display:block;font-weight:700;font-size:1.05rem;color:#1e293b;margin-bottom:12px;">
-              4. How helpful was the 24/7 AI Recovery Coach & Recovery Planner? 🤖
+              4. How helpful was the 24/7 AI Recovery Coach & Recovery Planner? 🤖 <span class="req-star" style="color:#ef4444;">*</span>
             </label>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q4_ai_coach" value="Extremely helpful with clear medical tips" checked style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q4_ai_coach" value="Extremely helpful with clear medical tips" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🌟 <strong>Extremely Helpful & Clear</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q4_ai_coach" value="Good for daily exercise routines" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q4_ai_coach" value="Good for daily exercise routines" style="accent-color:var(--primary,#4f46e5);" />
                 <span>👍 <strong>Good for Daily Planning</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q4_ai_coach" value="Neutral / Okay" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q4_ai_coach" value="Neutral / Okay" style="accent-color:var(--primary,#4f46e5);" />
                 <span>💡 <strong>Neutral / Okay</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q4_ai_coach" value="Did not use it yet" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q4_ai_coach" value="Did not use it yet" style="accent-color:var(--primary,#4f46e5);" />
                 <span>❌ <strong>Did Not Try It Yet</strong></span>
               </label>
             </div>
           </div>
 
           <!-- MCQ 5: Usability -->
-          <div style="margin-bottom:28px;">
+          <div class="mcq-group" id="group-q5" style="margin-bottom:28px;padding:14px;border-radius:14px;transition:all 0.3s;">
             <label style="display:block;font-weight:700;font-size:1.05rem;color:#1e293b;margin-bottom:12px;">
-              5. How easy was it to navigate and use the website interface? 📱
+              5. How easy was it to navigate and use the website interface? 📱 <span class="req-star" style="color:#ef4444;">*</span>
             </label>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q5_usability" value="Super easy & intuitive" checked style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q5_usability" value="Super easy & intuitive" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🚀 <strong>Super Easy & Clean</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q5_usability" value="Easy to understand" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q5_usability" value="Easy to understand" style="accent-color:var(--primary,#4f46e5);" />
                 <span>👍 <strong>Easy to Understand</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q5_usability" value="A bit confusing at first" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q5_usability" value="A bit confusing at first" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🧐 <strong>A Bit Confusing</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q5_usability" value="Difficult to navigate" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q5_usability" value="Difficult to navigate" style="accent-color:var(--primary,#4f46e5);" />
                 <span>⚠️ <strong>Difficult to Navigate</strong></span>
               </label>
             </div>
           </div>
 
           <!-- MCQ 6: Recommendation -->
-          <div style="margin-bottom:28px;">
+          <div class="mcq-group" id="group-q6" style="margin-bottom:28px;padding:14px;border-radius:14px;transition:all 0.3s;">
             <label style="display:block;font-weight:700;font-size:1.05rem;color:#1e293b;margin-bottom:12px;">
-              6. Would you recommend this platform for stroke patients doing home recovery? 🏥
+              6. Would you recommend this platform for stroke patients doing home recovery? 🏥 <span class="req-star" style="color:#ef4444;">*</span>
             </label>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;">
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q6_recommend" value="Definitely Yes (Highly Recommended)" checked style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q6_recommend" value="Definitely Yes (Highly Recommended)" style="accent-color:var(--primary,#4f46e5);" />
                 <span>💯 <strong>Definitely Yes (Highly Recommend)</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q6_recommend" value="Yes, with minor additions" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q6_recommend" value="Yes, with minor additions" style="accent-color:var(--primary,#4f46e5);" />
                 <span>👍 <strong>Yes, With Small Updates</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q6_recommend" value="Maybe / Unsure" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q6_recommend" value="Maybe / Unsure" style="accent-color:var(--primary,#4f46e5);" />
                 <span>🤔 <strong>Maybe / Unsure</strong></span>
               </label>
-              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;">
-                <input type="radio" name="q6_recommend" value="No" style="accent-color:var(--primary);" />
+              <label class="mcq-option" style="display:flex;align-items:center;gap:10px;padding:14px;border:1.5px solid #cbd5e1;border-radius:12px;cursor:pointer;transition:all 0.2s;background:#ffffff;">
+                <input type="radio" name="q6_recommend" value="No" style="accent-color:var(--primary,#4f46e5);" />
                 <span>👎 <strong>No</strong></span>
               </label>
             </div>
           </div>
 
           <!-- Suggestion Text Box -->
-          <div style="margin-bottom:32px;">
+          <div style="margin-bottom:32px;padding:14px;">
             <label style="display:block;font-weight:700;font-size:1.05rem;color:#1e293b;margin-bottom:8px;">
               📝 Any Changes, New Features, or Suggestions You Want Us to Add?
             </label>
@@ -202,7 +202,7 @@ export default function renderFeedbackPage() {
 
           <!-- Submit Button -->
           <div style="display:flex;justify-content:center;">
-            <button type="submit" class="btn btn-primary btn-lg" id="submit-fb-btn" style="padding:14px 40px;font-size:1.1rem;border-radius:14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(79,70,229,0.3);">
+            <button type="submit" class="btn btn-primary btn-lg" id="submit-fb-btn" style="padding:14px 40px;font-size:1.1rem;border-radius:14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(79,70,229,0.3);cursor:pointer;">
               <span>Submit Feedback</span> <i class="fas fa-paper-plane"></i>
             </button>
           </div>
@@ -212,7 +212,7 @@ export default function renderFeedbackPage() {
       <!-- Testimonials / Submitted Reviews Wall -->
       <div class="welcome-section" style="margin-bottom:16px;">
         <h2 style="font-size:1.35rem;font-weight:700;color:#1e293b;display:flex;align-items:center;gap:8px;">
-          <i class="fas fa-comments" style="color:var(--primary);"></i> Recent Tester Reviews & Feedbacks
+          <i class="fas fa-comments" style="color:var(--primary,#4f46e5);"></i> Recent Tester Reviews & Feedbacks
         </h2>
       </div>
       <div id="feedbacks-wall" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
@@ -227,24 +227,53 @@ export async function initFeedbackPage() {
   const wall = document.getElementById('feedbacks-wall');
   const submitBtn = document.getElementById('submit-fb-btn');
 
-  // Highlight active radio boxes
+  // Handle radio selection styling
   document.querySelectorAll('.mcq-option input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', () => {
       const name = radio.name;
+      // Reset outline on the question group if previously highlighted in red
+      const group = radio.closest('.mcq-group');
+      if (group) {
+        group.style.background = 'transparent';
+        group.style.boxShadow = 'none';
+      }
+
       document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
-        r.closest('.mcq-option').style.borderColor = r.checked ? 'var(--primary,#4f46e5)' : '#cbd5e1';
-        r.closest('.mcq-option').style.background = r.checked ? 'rgba(79,70,229,0.06)' : '#ffffff';
+        const option = r.closest('.mcq-option');
+        if (r.checked) {
+          option.style.borderColor = 'var(--primary,#4f46e5)';
+          option.style.background = 'rgba(79,70,229,0.08)';
+          option.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.2)';
+        } else {
+          option.style.borderColor = '#cbd5e1';
+          option.style.background = '#ffffff';
+          option.style.boxShadow = 'none';
+        }
       });
     });
-    if (radio.checked) {
-      radio.closest('.mcq-option').style.borderColor = 'var(--primary,#4f46e5)';
-      radio.closest('.mcq-option').style.background = 'rgba(79,70,229,0.06)';
-    }
+  });
+
+  // Hover effect for MCQ options
+  document.querySelectorAll('.mcq-option').forEach(option => {
+    option.addEventListener('mouseenter', () => {
+      const radio = option.querySelector('input[type="radio"]');
+      if (!radio.checked) {
+        option.style.borderColor = '#94a3b8';
+        option.style.background = '#f8fafc';
+      }
+    });
+    option.addEventListener('mouseleave', () => {
+      const radio = option.querySelector('input[type="radio"]');
+      if (!radio.checked) {
+        option.style.borderColor = '#cbd5e1';
+        option.style.background = '#ffffff';
+      }
+    });
   });
 
   async function loadFeedbacks() {
     try {
-      const resp = await fetch('/api/feedback/');
+      const resp = await fetch('/api/feedback');
       if (resp.ok) {
         const data = await resp.json();
         renderFeedbackCards(data.feedbacks || []);
@@ -294,27 +323,57 @@ export async function initFeedbackPage() {
 
   form.onsubmit = async (e) => {
     e.preventDefault();
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
 
     const getRadioVal = (name) => {
       const el = document.querySelector(`input[name="${name}"]:checked`);
       return el ? el.value : '';
     };
 
+    const q1 = getRadioVal('q1_rating');
+    const q2 = getRadioVal('q2_tracking');
+    const q3 = getRadioVal('q3_module');
+    const q4 = getRadioVal('q4_ai_coach');
+    const q5 = getRadioVal('q5_usability');
+    const q6 = getRadioVal('q6_recommend');
+
+    // Validation: Check if any MCQ is not selected
+    const questions = [
+      { id: 'group-q1', val: q1, num: 1, label: 'Overall Experience Rating' },
+      { id: 'group-q2', val: q2, num: 2, label: 'Camera Vision Tracking' },
+      { id: 'group-q3', val: q3, num: 3, label: 'Favorite Rehab Module' },
+      { id: 'group-q4', val: q4, num: 4, label: 'AI Recovery Coach' },
+      { id: 'group-q5', val: q5, num: 5, label: 'Platform Usability' },
+      { id: 'group-q6', val: q6, num: 6, label: 'Recommendation' }
+    ];
+
+    const unanswered = questions.find(q => !q.val);
+    if (unanswered) {
+      Toast.error(`Please answer Question ${unanswered.num}: ${unanswered.label}`);
+      const groupEl = document.getElementById(unanswered.id);
+      if (groupEl) {
+        groupEl.style.background = 'rgba(239, 68, 68, 0.08)';
+        groupEl.style.boxShadow = '0 0 0 2px rgba(239, 68, 68, 0.4)';
+        groupEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
+
     const payload = {
       name: document.getElementById('fb-name').value.trim() || 'Anonymous Reviewer',
-      q1_rating: getRadioVal('q1_rating'),
-      q2_tracking: getRadioVal('q2_tracking'),
-      q3_module: getRadioVal('q3_module'),
-      q4_ai_coach: getRadioVal('q4_ai_coach'),
-      q5_usability: getRadioVal('q5_usability'),
-      q6_recommend: getRadioVal('q6_recommend'),
+      q1_rating: q1,
+      q2_tracking: q2,
+      q3_module: q3,
+      q4_ai_coach: q4,
+      q5_usability: q5,
+      q6_recommend: q6,
       comments: document.getElementById('fb-comments').value.trim()
     };
 
     try {
-      await fetch('/api/feedback/', {
+      await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -328,7 +387,17 @@ export async function initFeedbackPage() {
     localStorage.setItem('user_feedbacks', JSON.stringify(local));
 
     Toast.success('Thank you so much for your feedback! ⭐');
+    
+    // Reset form
     document.getElementById('fb-comments').value = '';
+    document.querySelectorAll('.mcq-option input[type="radio"]').forEach(r => {
+      r.checked = false;
+      const opt = r.closest('.mcq-option');
+      opt.style.borderColor = '#cbd5e1';
+      opt.style.background = '#ffffff';
+      opt.style.boxShadow = 'none';
+    });
+
     submitBtn.disabled = false;
     submitBtn.innerHTML = '<span>Submit Feedback</span> <i class="fas fa-paper-plane"></i>';
 
