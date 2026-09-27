@@ -1,12 +1,19 @@
-/* Games Selection Page */
+/* Games Selection Page - Clinically-Grounded Rehabilitation Modules */
 import API from '../api.js';
 import { GameCard } from '../components/cards.js';
 
 export default function renderGamesPage() {
   return `
     <div class="welcome-section">
-      <h1>Rehabilitation Games</h1>
-      <p class="welcome-date">Select an exercise to continue your recovery</p>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
+        <div>
+          <h1>Clinical Rehabilitation Modules</h1>
+          <p class="welcome-date">Evidence-based motor relearning exercises designed for neuroplasticity and stroke recovery</p>
+        </div>
+        <span class="badge" style="background:rgba(16,185,129,0.15);color:#10b981;font-weight:700;padding:6px 14px;border-radius:20px;font-size:13px">
+          <i class="fas fa-check-circle"></i> FMA & ARAT Aligned
+        </span>
+      </div>
     </div>
     <div id="games-grid-container" class="game-select-grid">
       <!-- Loading games -->
@@ -22,52 +29,52 @@ export async function initGamesPage() {
     
     container.innerHTML = `
       ${GameCard({
-        type: 'target_touch',
-        name: 'Target Touch',
-        description: 'Improve your hand precision by touching targets that appear on screen.',
-        icon: '🎯',
-        lastScore: perf.target_touch?.best_score ? 'Best: ' + perf.target_touch.best_score : null,
-        onClickPath: '#/games/target_touch'
+        type: 'piano_tap',
+        name: 'Piano Finger Independence',
+        description: 'Isolate individual finger flexor/extensor control (Thumb to Pinky) to overcome abnormal post-stroke flexor synergy.',
+        icon: '🎹',
+        lastScore: perf.piano_tap?.best_score ? 'Best: ' + perf.piano_tap.best_score : null,
+        onClickPath: '#/games/piano_tap'
       })}
       ${GameCard({
-        type: 'bubble_pop',
-        name: 'Bubble Pop',
-        description: 'Open and close your hand to pop bubbles! Helps with hand gripping.',
-        icon: '🫧',
-        lastScore: perf.bubble_pop?.best_score ? 'Best: ' + perf.bubble_pop.best_score : null,
-        onClickPath: '#/games/bubble_pop'
+        type: 'knob_turn',
+        name: 'Forearm Pronation & Supination',
+        description: 'Rebuild forearm rotational range of motion to restore everyday independence (opening door knobs, taps, and bottle caps).',
+        icon: '🔐',
+        lastScore: perf.knob_turn?.best_score ? 'Best: ' + perf.knob_turn.best_score : null,
+        onClickPath: '#/games/knob_turn'
       })}
       ${GameCard({
-        type: 'number_show',
-        name: 'Number Showing',
-        description: 'Show the number of fingers requested on screen to improve dexterity.',
-        icon: '🔢',
-        lastScore: perf.number_show?.best_score ? 'Best: ' + perf.number_show.best_score : null,
-        onClickPath: '#/games/number_show'
+        type: 'pegboard_pinch',
+        name: '9-Hole Pegboard Pincer Test',
+        description: 'Gold-standard clinical dexterity training. Practice sub-millimeter thumb & index pincer grasp and release control.',
+        icon: '📌',
+        lastScore: perf.pegboard_pinch?.best_score ? 'Best: ' + perf.pegboard_pinch.best_score : null,
+        onClickPath: '#/games/pegboard_pinch'
       })}
       ${GameCard({
-        type: 'thumb_touch',
-        name: 'Thumb Touch',
-        description: 'Touch your thumb to every other finger sequentially to build coordination.',
-        icon: '🖐️',
-        lastScore: perf.thumb_touch?.best_score ? 'Best: ' + perf.thumb_touch.best_score : null,
-        onClickPath: '#/games/thumb_touch'
+        type: 'shelf_reach',
+        name: 'Shelf Reaching & Stacking',
+        description: 'Overhead shoulder elevation and elbow extension exercises to counteract post-stroke bicep flexion contractures.',
+        icon: '🗄️',
+        lastScore: perf.shelf_reach?.best_score ? 'Best: ' + perf.shelf_reach.best_score : null,
+        onClickPath: '#/games/shelf_reach'
       })}
       ${GameCard({
-        type: 'object_catch',
-        name: 'Object Catch',
-        description: 'Enhance your reaction time and hand coordination by catching falling objects.',
-        icon: '🧺',
-        lastScore: perf.object_catch?.best_score ? 'Best: ' + perf.object_catch.best_score : null,
-        onClickPath: '#/games/object_catch'
+        type: 'window_wipe',
+        name: 'Planar Window & Surface Sweep',
+        description: 'Continuous active planar sweeping motions to stretch spastic bicep & pectoralis muscle groups across wide bounds.',
+        icon: '🪟',
+        lastScore: perf.window_wipe?.best_score ? 'Best: ' + perf.window_wipe.best_score : null,
+        onClickPath: '#/games/window_wipe'
       })}
       ${GameCard({
-        type: 'path_following',
-        name: 'Path Following',
-        description: 'Build fine motor control by following guided paths with your fingertip.',
-        icon: '✏️',
-        lastScore: perf.path_following?.best_score ? 'Best: ' + perf.path_following.best_score : null,
-        onClickPath: '#/games/path_following'
+        type: 'facial_mirror',
+        name: 'Facial Symmetry Biofeedback',
+        description: 'Neuromuscular biofeedback for hemifacial droop (smile, brow lift, lip pucker, and cheek puff) to aid facial recovery.',
+        icon: '🪞',
+        lastScore: perf.facial_mirror?.best_score ? 'Best: ' + perf.facial_mirror.best_score : null,
+        onClickPath: '#/games/facial_mirror'
       })}
     `;
   } catch (err) {

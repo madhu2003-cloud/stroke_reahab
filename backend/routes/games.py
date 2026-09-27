@@ -8,7 +8,10 @@ from services.analytics import get_game_performance
 
 games_bp = Blueprint('games', __name__)
 
-VALID_GAME_TYPES = ['target_touch', 'object_catch', 'path_following']
+VALID_GAME_TYPES = [
+    'piano_tap', 'knob_turn', 'pegboard_pinch', 'shelf_reach', 'window_wipe', 'facial_mirror',
+    'target_touch', 'object_catch', 'path_following', 'bubble_pop', 'number_show', 'thumb_touch'
+]
 
 
 @games_bp.route('/result', methods=['POST'])

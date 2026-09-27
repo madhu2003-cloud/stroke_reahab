@@ -201,13 +201,21 @@ export default class GameBase {
   
   getResults() {
     // Map class names to snake_case game_type expected by backend
-    let gameType = 'target_touch';
-    if (this.constructor.name === 'ObjectCatchGame') gameType = 'object_catch';
-    if (this.constructor.name === 'PathFollowingGame') gameType = 'path_following';
+    let gameType = 'piano_tap';
+    const cName = this.constructor.name;
+    if (cName === 'PianoTapGame') gameType = 'piano_tap';
+    else if (cName === 'KnobTurnGame') gameType = 'knob_turn';
+    else if (cName === 'PegboardPinchGame') gameType = 'pegboard_pinch';
+    else if (cName === 'ShelfReachGame') gameType = 'shelf_reach';
+    else if (cName === 'WindowWipeGame') gameType = 'window_wipe';
+    else if (cName === 'FacialMirrorGame') gameType = 'facial_mirror';
+    else if (cName === 'TargetTouchGame') gameType = 'target_touch';
+    else if (cName === 'ObjectCatchGame') gameType = 'object_catch';
+    else if (cName === 'PathFollowingGame') gameType = 'path_following';
     
     return {
       score: Math.floor(this.score),
-      accuracy: Math.floor(this.accuracy),
+      accuracy: Math.floor(this.accuracy || this.getAccuracy()),
       repetitions: this.repetitions,
       reaction_time: Math.floor(this.getAverageReactionTime()),
       duration: this.duration,

@@ -32,24 +32,30 @@ export function getInitials(name) {
 
 export function gameTypeName(type) {
   const m = { 
+    piano_tap: 'Virtual Piano Finger Independence',
+    knob_turn: 'Forearm Pronation / Supination Lab',
+    pegboard_pinch: '9-Hole Pegboard Pincer Test',
+    shelf_reach: 'Shelf Reaching & Stacking',
+    window_wipe: 'Planar Window & Surface Sweep',
+    facial_mirror: 'Facial Symmetry Biofeedback',
     target_touch: 'Target Touch', 
     object_catch: 'Object Catch', 
-    path_following: 'Path Following',
-    bubble_pop: 'Bubble Pop',
-    number_show: 'Number Showing',
-    thumb_touch: 'Thumb Touch'
+    path_following: 'Path Following'
   };
-  return m[type] || type;
+  return m[type] || type.replace('_', ' ').toUpperCase();
 }
 
 export function gameTypeIcon(type) {
   const m = { 
+    piano_tap: '🎹',
+    knob_turn: '🔐',
+    pegboard_pinch: '📌',
+    shelf_reach: '🗄️',
+    window_wipe: '🪟',
+    facial_mirror: '🪞',
     target_touch: '🎯', 
     object_catch: '🧺', 
-    path_following: '✏️',
-    bubble_pop: '🫧',
-    number_show: '🔢',
-    thumb_touch: '🖐️'
+    path_following: '✏️'
   };
   return m[type] || '🎮';
 }

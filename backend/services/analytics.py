@@ -102,7 +102,10 @@ def get_monthly_progress(patient_id):
 
 def get_game_performance(patient_id):
     """Get per-game performance statistics."""
-    game_types = ['target_touch', 'object_catch', 'path_following']
+    game_types = [
+        'piano_tap', 'knob_turn', 'pegboard_pinch', 'shelf_reach', 'window_wipe', 'facial_mirror',
+        'target_touch', 'object_catch', 'path_following'
+    ]
     perf = {}
     for gt in game_types:
         results = ExerciseResult.query.filter_by(patient_id=patient_id, game_type=gt).all()

@@ -17,8 +17,14 @@ export default function renderHistory() {
           <option value="week">This Week</option>
           <option value="month">This Month</option>
         </select>
-        <select class="form-select" id="history-game" style="width:200px">
-          <option value="">All Games</option>
+        <select class="form-select" id="history-game" style="width:240px">
+          <option value="">All Clinical Modules</option>
+          <option value="piano_tap">Piano Finger Independence</option>
+          <option value="knob_turn">Forearm Pronation & Supination</option>
+          <option value="pegboard_pinch">9-Hole Pegboard Pincer Test</option>
+          <option value="shelf_reach">Shelf Reaching & Stacking</option>
+          <option value="window_wipe">Planar Window Sweep</option>
+          <option value="facial_mirror">Facial Symmetry Biofeedback</option>
           <option value="target_touch">Target Touch</option>
           <option value="object_catch">Object Catch</option>
           <option value="path_following">Path Following</option>
