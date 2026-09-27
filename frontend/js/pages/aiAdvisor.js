@@ -254,11 +254,30 @@ export function initAiAdvisor() {
       • Ensure 7-8 hours of sleep for cellular and neural consolidation.`;
     }
 
-    // ── 8. Progress & Stats ──
+    // ── 8. Recovery Plan & Schedule ──
+    if (q.includes('plan') || q.includes('schedule') || q.includes('routine') || q.includes('daily') || q.includes('program') || q.includes('regimen') || (q.includes('how') && q.includes('recovery'))) {
+      return `📅 <strong>Your Personalized Daily Stroke Recovery Plan:</strong><br/><br/>
+      To rebuild neural pathways without causing fatigue, physiotherapists recommend <strong>3 short sessions of 15 minutes</strong> every day:<br/><br/>
+      🌅 <strong>1. Morning Session (15 mins) — Fine Motor & Fingers:</strong><br/>
+      • <strong>Warm-up:</strong> 5 mins of gentle warm towel compress on your hand.<br/>
+      • <strong>Exercise 1:</strong> 2 rounds of <em>Piano Finger Independence</em> (isolate individual fingers).<br/>
+      • <strong>Exercise 2:</strong> 2 rounds of <em>9-Hole Pegboard Pincer Test</em> (rebuild thumb-index pinch).<br/><br/>
+      ☀️ <strong>2. Afternoon Session (15 mins) — Arm & Shoulder Reach:</strong><br/>
+      • <strong>Exercise 1:</strong> 2 rounds of <em>Forearm Knob & Key Turning</em> (improve wrist rotation).<br/>
+      • <strong>Exercise 2:</strong> 2 rounds of <em>Shelf Reaching & Stacking</em> (lift overhead to stretch bicep).<br/>
+      • <strong>Exercise 3:</strong> 1 round of <em>Planar Window Sweep</em> (smooth wide arm motion).<br/><br/>
+      🌙 <strong>3. Evening Session (15 mins) — Speech, Face & ROM Test:</strong><br/>
+      • <strong>Facial Training:</strong> 1 round of <em>Facial Symmetry Biofeedback</em>.<br/>
+      • <strong>Speech Practice:</strong> 5 mins in the <em>Speech Therapy Lab</em> (vowel & word clarity).<br/>
+      • <strong>Daily Check:</strong> Test your joint angles in the <em>ROM & Tremor Lab</em> to log today's progress!<br/><br/>
+      💡 <em>Why this plan works:</em> Spreading exercises into three 15-minute blocks gives your brain 45 minutes of daily practice while keeping muscles relaxed and fatigue-free!`;
+    }
+
+    // ── 8.5 Progress & Stats ──
     if (q.includes('progress') || q.includes('score') || q.includes('recommend') || q.includes('analysis') || q.includes('streak')) {
       return `📊 <strong>AI Clinical Recovery Assessment:</strong><br/>
       • <strong>Motor Accuracy:</strong> You are showing strong consistency in visual-motor coordination.<br/>
-      • <strong>Recommendation:</strong> Increase daily game sets by 1 round, and focus on <em>Speech Therapy</em> or <em>Range of Motion</em> exercises to maintain balanced recovery. Keep your streak active!`;
+      • <strong>Recommendation:</strong> Complete your 3 daily 15-minute sessions to maintain balanced recovery. Keep your streak active!`;
     }
 
     // ── 9. Speech & Dysarthria ──
