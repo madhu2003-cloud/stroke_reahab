@@ -1,17 +1,36 @@
 import os
 import requests
+import re
 from flask import Blueprint, request, jsonify
 
 ai_bp = Blueprint('ai', __name__)
 
 SYSTEM_PROMPT = (
-    "You are AURA AI, an empathetic, highly knowledgeable, and encouraging clinical Stroke "
-    "Rehabilitation & Neuro-Physiotherapy AI Coach. You assist stroke patients, caregivers, and "
-    "physiotherapists with motor recovery exercises, hand stiffness, range of motion (ROM), "
-    "tremor reduction, speech therapy, and fatigue management. Keep explanations clear, actionable, "
-    "structured with bullet points, and uplifting. Always remind patients to consult their doctor for acute symptoms "
-    "and emphasize F.A.S.T. stroke safety."
+    "You are AURA AI, a dedicated clinical Stroke Rehabilitation & Neuro-Physiotherapy AI Coach.\n\n"
+    "CRITICAL DOMAIN GUARDRAIL:\n"
+    "You must ONLY answer questions related to stroke recovery, physical therapy, motor relearning exercises, "
+    "hand/arm stiffness, Range of Motion (ROM), tremor reduction, speech therapy, facial therapy, fatigue management, "
+    "F.A.S.T. stroke warning signs, and patient wellness.\n\n"
+    "If the user asks ANY off-topic or unrelated question (such as geography, distance between cities, general knowledge, "
+    "trivia, movies, coding, math, politics, weather, recipes, travel, or random topics like 'distance from here to coimbatore'), "
+    "you MUST NOT answer the trivia or off-topic question. Instead, reply politely:\n"
+    "'I am your dedicated Stroke Rehabilitation & Clinical Recovery AI Coach. I am specialized strictly in stroke recovery, physical therapy exercises, motor relearning, and wellness. Please ask a question related to your rehabilitation!'\n\n"
+    "For all stroke and recovery questions, give a clear, direct, and empathetic answer specifically addressing what the user asked."
 )
+
+REHAB_KEYWORDS = [
+    'stroke', 'rehab', 'recovery', 'physio', 'therapy', 'exercise', 'hand', 'arm', 'finger', 'wrist',
+    'shoulder', 'elbow', 'leg', 'walk', 'mobility', 'stiff', 'spastic', 'tremor', 'ataxia', 'shake',
+    'fast', 'symptom', 'warning', 'pain', 'fatigue', 'tired', 'rest', 'sleep', 'speech', 'voice',
+    'aphasia', 'dysarthria', 'face', 'droop', 'smile', 'swallow', 'rom', 'angle', 'motion', 'game',
+    'pegboard', 'piano', 'shelf', 'window', 'knob', 'routine', 'plan', 'schedule', 'doctor', 'patient',
+    'neuroplasticity', 'brain', 'muscle', 'clench', 'fist', 'pinch', 'grip', 'stretch', 'improve',
+    'progress', 'score', 'streak', 'help', 'hi', 'hello', 'hey', 'thank', 'who are you', 'what can you do'
+]
+
+def is_rehab_related(query):
+    q = query.lower()
+    return any(k in q for k in REHAB_KEYWORDS)
 
 @ai_bp.route('/chat', methods=['POST'])
 def ai_chat():
@@ -21,6 +40,18 @@ def ai_chat():
     
     if not message:
         return jsonify({'error': 'Message is required'}), 400
+
+    # 1. Quick Guardrail Check
+    if not is_rehab_related(message) and len(message.split()) > 2:
+        return jsonify({
+            'reply': (
+                "I am your dedicated <strong>Stroke Rehabilitation & Clinical Recovery AI Coach</strong>. "
+                "I am specialized strictly in stroke recovery, physical therapy exercises, motor relearning, "
+                "and wellness.<br/><br/>"
+                "Please ask a question related to your rehabilitation, exercises, or recovery routine! 🩺"
+            ),
+            'source': 'guardrail'
+        }), 200
 
     api_key = client_key or os.environ.get('GEMINI_API_KEY', '')
 
@@ -43,8 +74,8 @@ def ai_chat():
                             {"role": "user", "parts": [{"text": f"{SYSTEM_PROMPT}\n\nPatient Query: {message}"}]}
                         ],
                         "generationConfig": {
-                            "temperature": 0.7,
-                            "maxOutputTokens": 650
+                            "temperature": 0.6,
+                            "maxOutputTokens": 600
                         }
                     },
                     timeout=10
@@ -58,7 +89,6 @@ def ai_chat():
             except Exception as e:
                 continue
 
-    # Fallback to smart clinical reasoning if external API is unreachable or key not set
     return jsonify({
         'reply': None,
         'source': 'fallback'
