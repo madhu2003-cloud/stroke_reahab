@@ -173,6 +173,9 @@ def generate_clinical_response(query):
     )
 
 @ai_bp.route('/chat', methods=['POST'])
+@ai_bp.route('/chat/', methods=['POST'])
+@ai_bp.route('', methods=['POST'])
+@ai_bp.route('/', methods=['POST'])
 def ai_chat():
     data = request.get_json() or {}
     message = data.get('message', '').strip()

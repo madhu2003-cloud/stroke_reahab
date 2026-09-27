@@ -21,6 +21,7 @@ def save_feedbacks(feedbacks):
     with open(FEEDBACK_FILE, 'w', encoding='utf-8') as f:
         json.dump(feedbacks, f, indent=2)
 
+@feedback_bp.route('', methods=['GET'])
 @feedback_bp.route('/', methods=['GET'])
 def get_feedbacks():
     feedbacks = load_feedbacks()
@@ -29,6 +30,7 @@ def get_feedbacks():
         'feedbacks': feedbacks
     }), 200
 
+@feedback_bp.route('', methods=['POST'])
 @feedback_bp.route('/', methods=['POST'])
 def submit_feedback():
     data = request.get_json() or {}
