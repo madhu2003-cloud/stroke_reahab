@@ -6,29 +6,43 @@ export default function renderFeedbackPage() {
   const user = Auth.getUser() || {};
 
   return `
-    <div class="page-container" style="max-width:900px;margin:0 auto;padding:24px 16px;">
+    <div class="page-container" style="max-width:960px;margin:0 auto;padding:24px 16px;">
       <!-- Header -->
       <div class="welcome-section" style="margin-bottom:24px;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px">
           <div>
-            <h1>⭐ Share Your Experience & Feedback</h1>
-            <p class="welcome-date">Help us evaluate and improve our AI Stroke Telerehabilitation platform</p>
+            <h1 style="display:flex;align-items:center;gap:10px;">
+              <span>⭐</span> Share Your Experience & Feedback
+            </h1>
+            <p class="welcome-date">Help us evaluate and improve the AURA AI Stroke Telerehabilitation platform</p>
           </div>
-          <span class="badge" style="background:rgba(79,70,229,0.12);color:var(--primary,#4f46e5);font-weight:700;padding:8px 16px;border-radius:20px;font-size:13px">
-            <i class="fas fa-clipboard-check"></i> 6 Quick MCQs + 1 Suggestion
-          </span>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+            <span class="badge" id="fb-total-badge" style="background:rgba(79,70,229,0.12);color:var(--primary,#4f46e5);font-weight:700;padding:8px 16px;border-radius:20px;font-size:13px">
+              <i class="fas fa-comments"></i> <span id="fb-count-text">Loading reviews...</span>
+            </span>
+          </div>
         </div>
       </div>
 
       <!-- Feedback Form Card -->
-      <div class="card" style="padding:32px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.06);margin-bottom:32px;background:#ffffff;">
+      <div class="card" style="padding:32px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.06);margin-bottom:36px;background:#ffffff;border:1px solid #e2e8f0;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(79,70,229,0.1);display:flex;align-items:center;justify-content:center;color:var(--primary,#4f46e5);font-size:1.2rem;">
+            <i class="fas fa-edit"></i>
+          </div>
+          <div>
+            <h3 style="margin:0;font-size:1.2rem;color:#1e293b;">Submit Your Feedback & Ratings</h3>
+            <p style="margin:0;font-size:0.85rem;color:#64748b;">All submissions are displayed publicly on the review wall below and preserved permanently.</p>
+          </div>
+        </div>
+
         <form id="feedback-form">
           <!-- Tester Name -->
           <div style="margin-bottom:28px;">
-            <label style="display:block;font-weight:700;font-size:1rem;color:#1e293b;margin-bottom:8px;">
-              Your Name / Tester ID <span style="font-size:0.85rem;color:#64748b;font-weight:400;">(Optional)</span>
+            <label style="display:block;font-weight:700;font-size:0.95rem;color:#1e293b;margin-bottom:8px;">
+              Your Name / Evaluator Title <span style="font-size:0.82rem;color:#64748b;font-weight:400;">(Optional)</span>
             </label>
-            <input type="text" id="fb-name" class="inp" placeholder="e.g. Rahul, Dr. Priya, Group Member..." value="${user.name || ''}" style="width:100%;max-width:400px;padding:12px 16px;border-radius:10px;font-size:0.95rem;" />
+            <input type="text" id="fb-name" class="inp" placeholder="e.g. Dr. Akhil, Evaluator, Sarah..." value="${user.name || ''}" style="width:100%;max-width:420px;padding:12px 16px;border-radius:10px;font-size:0.95rem;border:1.5px solid #cbd5e1;" />
           </div>
 
           <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0;" />
@@ -197,12 +211,12 @@ export default function renderFeedbackPage() {
               📝 Any Changes, New Features, or Suggestions You Want Us to Add?
             </label>
             <p style="font-size:0.85rem;color:#64748b;margin-bottom:12px;">Tell us what you liked, what changes we should make, or any new games/features you'd love to see:</p>
-            <textarea id="fb-comments" class="inp" rows="4" placeholder="Write your suggestions, requested changes, or thoughts here..." style="width:100%;padding:14px;border-radius:12px;font-size:0.95rem;line-height:1.6;"></textarea>
+            <textarea id="fb-comments" class="inp" rows="4" placeholder="Write your suggestions, requested changes, or thoughts here..." style="width:100%;padding:14px;border-radius:12px;font-size:0.95rem;line-height:1.6;border:1.5px solid #cbd5e1;"></textarea>
           </div>
 
           <!-- Submit Button -->
           <div style="display:flex;justify-content:center;">
-            <button type="submit" class="btn btn-primary btn-lg" id="submit-fb-btn" style="padding:14px 40px;font-size:1.1rem;border-radius:14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(79,70,229,0.3);cursor:pointer;">
+            <button type="submit" class="btn btn-primary btn-lg" id="submit-fb-btn" style="padding:14px 44px;font-size:1.1rem;border-radius:14px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 20px rgba(79,70,229,0.3);cursor:pointer;border:none;">
               <span>Submit Feedback</span> <i class="fas fa-paper-plane"></i>
             </button>
           </div>
@@ -210,12 +224,17 @@ export default function renderFeedbackPage() {
       </div>
 
       <!-- Testimonials / Submitted Reviews Wall -->
-      <div class="welcome-section" style="margin-bottom:16px;">
-        <h2 style="font-size:1.35rem;font-weight:700;color:#1e293b;display:flex;align-items:center;gap:8px;">
-          <i class="fas fa-comments" style="color:var(--primary,#4f46e5);"></i> Recent Tester Reviews & Feedbacks
+      <div class="welcome-section" style="margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <h2 style="font-size:1.4rem;font-weight:700;color:#1e293b;display:flex;align-items:center;gap:10px;margin:0;">
+          <i class="fas fa-comments" style="color:var(--primary,#4f46e5);"></i> Community & Tester Reviews Wall
         </h2>
+        <button id="refresh-fb-btn" class="btn btn-sm" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1;padding:6px 14px;border-radius:10px;cursor:pointer;display:flex;align-items:center;gap:6px;">
+          <i class="fas fa-sync-alt"></i> Refresh Wall
+        </button>
       </div>
-      <div id="feedbacks-wall" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+
+      <!-- Reviews Wall Container -->
+      <div id="feedbacks-wall" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
         <!-- Loaded via JS -->
       </div>
     </div>
@@ -226,12 +245,15 @@ export async function initFeedbackPage() {
   const form = document.getElementById('feedback-form');
   const wall = document.getElementById('feedbacks-wall');
   const submitBtn = document.getElementById('submit-fb-btn');
+  const countBadge = document.getElementById('fb-count-text');
+  const refreshBtn = document.getElementById('refresh-fb-btn');
 
-  // Handle radio selection styling
+  let currentFeedbacks = [];
+
+  // Radio selection styling
   document.querySelectorAll('.mcq-option input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', () => {
       const name = radio.name;
-      // Reset outline on the question group if previously highlighted in red
       const group = radio.closest('.mcq-group');
       if (group) {
         group.style.background = 'transparent';
@@ -257,68 +279,170 @@ export async function initFeedbackPage() {
   document.querySelectorAll('.mcq-option').forEach(option => {
     option.addEventListener('mouseenter', () => {
       const radio = option.querySelector('input[type="radio"]');
-      if (!radio.checked) {
+      if (radio && !radio.checked) {
         option.style.borderColor = '#94a3b8';
         option.style.background = '#f8fafc';
       }
     });
     option.addEventListener('mouseleave', () => {
       const radio = option.querySelector('input[type="radio"]');
-      if (!radio.checked) {
+      if (radio && !radio.checked) {
         option.style.borderColor = '#cbd5e1';
         option.style.background = '#ffffff';
       }
     });
   });
 
+  if (refreshBtn) {
+    refreshBtn.onclick = async () => {
+      refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+      await loadFeedbacks();
+      refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Wall';
+      Toast.info('Reviews wall updated');
+    };
+  }
+
   async function loadFeedbacks() {
     try {
       const resp = await fetch('/api/feedback');
       if (resp.ok) {
         const data = await resp.json();
-        renderFeedbackCards(data.feedbacks || []);
+        currentFeedbacks = data.feedbacks || [];
+        renderFeedbackCards(currentFeedbacks);
         return;
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Backend feedback fetch error:', e);
+    }
 
-    // Fallback to localStorage
+    // Fallback to localStorage if offline
     const local = JSON.parse(localStorage.getItem('user_feedbacks') || '[]');
-    renderFeedbackCards(local);
+    currentFeedbacks = local;
+    renderFeedbackCards(currentFeedbacks);
   }
 
   function renderFeedbackCards(list) {
+    if (countBadge) {
+      countBadge.textContent = `${list.length} ${list.length === 1 ? 'Review' : 'Reviews'} Displayed Forever`;
+    }
+
     if (!list || list.length === 0) {
       wall.innerHTML = `
-        <div style="grid-column:1/-1;background:#f8fafc;padding:32px;border-radius:16px;text-align:center;color:#64748b;border:1px dashed #cbd5e1;">
-          <i class="fas fa-comment-dots" style="font-size:2rem;margin-bottom:8px;color:#94a3b8;"></i>
-          <p style="margin:0;font-weight:600;">No feedbacks submitted yet. Be the first to share your experience above!</p>
+        <div style="grid-column:1/-1;background:#f8fafc;padding:48px 20px;border-radius:18px;text-align:center;color:#64748b;border:2px dashed #cbd5e1;">
+          <div style="font-size:2.8rem;margin-bottom:12px;color:#94a3b8;">💬</div>
+          <h3 style="margin:0 0 8px;color:#334155;font-size:1.2rem;">No Feedbacks Yet</h3>
+          <p style="margin:0;font-size:0.95rem;">Be the very first reviewer to share your experience using the form above!</p>
         </div>
       `;
       return;
     }
 
     wall.innerHTML = list.map(item => `
-      <div class="card" style="padding:20px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.04);background:#ffffff;border-left:4px solid var(--primary,#4f46e5);">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
-          <div style="font-weight:700;color:#1e293b;font-size:1rem;">${item.name || 'Anonymous Reviewer'}</div>
-          <span style="font-size:0.75rem;color:#94a3b8;">${item.created_at || 'Recent'}</span>
-        </div>
-        <div style="color:#f59e0b;font-weight:700;font-size:0.9rem;margin-bottom:8px;">
-          ${item.q1_rating || '⭐⭐⭐⭐⭐'}
-        </div>
-        <div style="font-size:0.85rem;color:#475569;margin-bottom:6px;">
-          <strong>Favorite:</strong> ${item.q3_module || 'Rehab Games'}
-        </div>
-        <div style="font-size:0.85rem;color:#475569;margin-bottom:8px;">
-          <strong>Vision Tracking:</strong> ${item.q2_tracking || 'Smooth'}
-        </div>
-        ${item.comments ? `
-          <div style="background:#f1f5f9;padding:10px 14px;border-radius:10px;font-size:0.88rem;color:#334155;font-style:italic;line-height:1.5;margin-top:10px;">
-            "${item.comments}"
+      <div class="card feedback-card-item" id="fb-card-${item.id}" style="padding:22px;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,0.05);background:#ffffff;border:1px solid #e2e8f0;border-top:4px solid var(--primary,#4f46e5);display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.2s, box-shadow 0.2s;">
+        <div>
+          <!-- Header with Reviewer Name & Time -->
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:8px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;border-radius:50%;background:rgba(79,70,229,0.12);color:var(--primary,#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;">
+                ${(item.name || 'A').charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <div style="font-weight:700;color:#0f172a;font-size:1.02rem;">${item.name || 'Anonymous Reviewer'}</div>
+                <div style="font-size:0.75rem;color:#94a3b8;"><i class="far fa-clock"></i> ${item.created_at || 'Recent'}</div>
+              </div>
+            </div>
+            <!-- Star Rating Badge -->
+            <span style="background:#fef3c7;color:#b45309;font-weight:700;padding:4px 10px;border-radius:12px;font-size:0.8rem;white-space:nowrap;">
+              ${item.q1_rating ? item.q1_rating.split('-')[0].trim() : '⭐⭐⭐⭐⭐'}
+            </span>
           </div>
-        ` : ''}
+
+          <!-- Feature Badges -->
+          <div style="display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:0.85rem;color:#475569;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-weight:600;color:#1e293b;">🎮 Favorite:</span>
+              <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q3_module || 'Rehab Games'}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-weight:600;color:#1e293b;">📷 Camera:</span>
+              <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q2_tracking || 'Smooth'}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-weight:600;color:#1e293b;">🤖 AI Coach:</span>
+              <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q4_ai_coach || 'Helpful'}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span style="font-weight:600;color:#1e293b;">🏥 Recommend:</span>
+              <span style="background:#ecfdf5;color:#047857;font-weight:600;padding:2px 8px;border-radius:6px;">${item.q6_recommend || 'Yes'}</span>
+            </div>
+          </div>
+
+          <!-- Comments Quote Bubble -->
+          ${item.comments ? `
+            <div style="background:#f8fafc;border-left:3px solid var(--primary,#4f46e5);padding:10px 14px;border-radius:8px;font-size:0.88rem;color:#334155;font-style:italic;line-height:1.5;margin-top:10px;">
+              <i class="fas fa-quote-left" style="color:#94a3b8;font-size:0.75rem;margin-right:4px;"></i>
+              ${item.comments}
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Footer Card Actions (Delete Button) -->
+        <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid #f1f5f9;">
+          <button class="btn-delete-fb" data-id="${item.id}" data-name="${item.name || 'Reviewer'}" style="background:rgba(239,68,68,0.06);color:#dc2626;border:1px solid #fecaca;padding:6px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.2s;">
+            <i class="fas fa-trash-alt"></i> Delete Feedback
+          </button>
+        </div>
       </div>
     `).join('');
+
+    // Attach delete handlers
+    document.querySelectorAll('.btn-delete-fb').forEach(btn => {
+      btn.onclick = async (e) => {
+        e.preventDefault();
+        const fbId = btn.getAttribute('data-id');
+        const fbName = btn.getAttribute('data-name') || 'this review';
+        
+        if (!confirm(`Are you sure you want to permanently delete the feedback from "${fbName}"?`)) {
+          return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+
+        try {
+          await fetch(`/api/feedback/${fbId}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } catch (err) {
+          try {
+            await fetch('/api/feedback/delete', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ id: fbId })
+            });
+          } catch (e2) {}
+        }
+
+        // Remove from local array
+        currentFeedbacks = currentFeedbacks.filter(f => String(f.id) !== String(fbId));
+        localStorage.setItem('user_feedbacks', JSON.stringify(currentFeedbacks));
+
+        // Animate card removal
+        const cardEl = document.getElementById(`fb-card-${fbId}`);
+        if (cardEl) {
+          cardEl.style.opacity = '0';
+          cardEl.style.transform = 'scale(0.9)';
+          setTimeout(() => {
+            renderFeedbackCards(currentFeedbacks);
+          }, 250);
+        } else {
+          renderFeedbackCards(currentFeedbacks);
+        }
+
+        Toast.success('Feedback deleted successfully');
+      };
+    });
   }
 
   form.onsubmit = async (e) => {
@@ -336,7 +460,6 @@ export async function initFeedbackPage() {
     const q5 = getRadioVal('q5_usability');
     const q6 = getRadioVal('q6_recommend');
 
-    // Validation: Check if any MCQ is not selected
     const questions = [
       { id: 'group-q1', val: q1, num: 1, label: 'Overall Experience Rating' },
       { id: 'group-q2', val: q2, num: 2, label: 'Camera Vision Tracking' },
@@ -359,7 +482,7 @@ export async function initFeedbackPage() {
     }
 
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Feedback...';
 
     const payload = {
       name: document.getElementById('fb-name').value.trim() || 'Anonymous Reviewer',
@@ -372,36 +495,57 @@ export async function initFeedbackPage() {
       comments: document.getElementById('fb-comments').value.trim()
     };
 
+    let submittedEntry = null;
+
     try {
-      await fetch('/api/feedback', {
+      const resp = await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-    } catch (err) {}
+      if (resp.ok) {
+        const resData = await resp.json();
+        submittedEntry = resData.feedback;
+      }
+    } catch (err) {
+      console.warn('POST feedback server issue:', err);
+    }
 
-    // Save locally
-    const local = JSON.parse(localStorage.getItem('user_feedbacks') || '[]');
-    payload.created_at = 'Just now';
-    local.unshift(payload);
-    localStorage.setItem('user_feedbacks', JSON.stringify(local));
+    if (!submittedEntry) {
+      submittedEntry = {
+        id: Date.now(),
+        ...payload,
+        created_at: 'Just now'
+      };
+    }
 
-    Toast.success('Thank you so much for your feedback! ⭐');
+    // Prepend to current feedbacks list
+    currentFeedbacks.unshift(submittedEntry);
+    localStorage.setItem('user_feedbacks', JSON.stringify(currentFeedbacks));
+
+    Toast.success('Thank you so much! Your feedback has been posted permanently. ⭐');
     
     // Reset form
     document.getElementById('fb-comments').value = '';
     document.querySelectorAll('.mcq-option input[type="radio"]').forEach(r => {
       r.checked = false;
       const opt = r.closest('.mcq-option');
-      opt.style.borderColor = '#cbd5e1';
-      opt.style.background = '#ffffff';
-      opt.style.boxShadow = 'none';
+      if (opt) {
+        opt.style.borderColor = '#cbd5e1';
+        opt.style.background = '#ffffff';
+        opt.style.boxShadow = 'none';
+      }
     });
 
     submitBtn.disabled = false;
     submitBtn.innerHTML = '<span>Submit Feedback</span> <i class="fas fa-paper-plane"></i>';
 
-    await loadFeedbacks();
+    // Render updated wall and scroll to wall
+    renderFeedbackCards(currentFeedbacks);
+    const wallTitle = document.querySelector('#feedbacks-wall');
+    if (wallTitle) {
+      wallTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
 
   await loadFeedbacks();

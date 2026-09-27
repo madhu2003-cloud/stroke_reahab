@@ -10,6 +10,7 @@ export default function renderLanding() {
         <li><a href="#/">Home</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#games-preview">Games</a></li>
+        <li><a href="#/feedback" style="color:var(--primary,#4f46e5);font-weight:700;"><i class="fas fa-star"></i> Feedback</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-auth">
@@ -25,6 +26,7 @@ export default function renderLanding() {
     <a href="#/">Home</a>
     <a href="#features">Features</a>
     <a href="#games-preview">Games</a>
+    <a href="#/feedback" style="color:var(--primary,#4f46e5);font-weight:700;"><i class="fas fa-star"></i> Feedback & Reviews</a>
     <a href="#contact">Contact</a>
     <div class="nav-auth" style="display:flex;gap:12px;margin-top:16px;">
       ${Auth.isLoggedIn()
@@ -113,7 +115,7 @@ export default function renderLanding() {
         <div class="logo"><span>🧠</span> StrokeRehab</div>
         <p>A comprehensive stroke rehabilitation platform providing interactive exercises and progress monitoring for patients, caregivers, and doctors.</p>
       </div>
-      <div class="footer-col"><h4>Quick Links</h4><a href="#/">Home</a><a href="#features">Features</a><a href="#games-preview">Games</a></div>
+      <div class="footer-col"><h4>Quick Links</h4><a href="#/">Home</a><a href="#features">Features</a><a href="#games-preview">Games</a><a href="#/feedback">Feedback Wall</a></div>
       <div class="footer-col"><h4>Legal</h4><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
       <div class="footer-col"><h4>Contact</h4><a href="#">support@strokerehab.com</a><a href="#">+1 (555) 123-4567</a></div>
     </div>

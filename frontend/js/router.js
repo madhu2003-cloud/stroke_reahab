@@ -168,7 +168,7 @@ export function setupRouter() {
   router.addRoute('#/prescriptions', renderPrescriptionsPage, initPrescriptionsPage, { protected: true, withSidebar: true });
   router.addRoute('#/export-report', renderExportReport, initExportReport, { protected: true, withSidebar: true });
   router.addRoute('#/cheering', renderCheeringPage, initCheeringPage, { protected: true, withSidebar: true });
-  router.addRoute('#/feedback', renderFeedbackPage, initFeedbackPage, { protected: true, withSidebar: true });
+  router.addRoute('#/feedback', renderFeedbackPage, initFeedbackPage, { protected: false, withSidebar: true });
 
   return router;
 }

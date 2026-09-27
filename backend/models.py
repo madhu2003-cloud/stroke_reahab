@@ -139,3 +139,31 @@ class Streak(db.Model):
             'longest_streak': self.longest_streak,
             'last_activity': self.last_activity_date.isoformat() if self.last_activity_date else None,
         }
+
+
+class Feedback(db.Model):
+    __tablename__ = 'feedbacks'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(150), nullable=False, default='Anonymous Reviewer')
+    q1_rating = db.Column(db.String(100), nullable=False, default='5 Stars - Excellent')
+    q2_tracking = db.Column(db.String(100), nullable=False, default='Very smooth & responsive')
+    q3_module = db.Column(db.String(100), nullable=False, default='Virtual Piano Tapping')
+    q4_ai_coach = db.Column(db.String(100), nullable=False, default='Very helpful with clear medical tips')
+    q5_usability = db.Column(db.String(100), nullable=False, default='Super easy & intuitive')
+    q6_recommend = db.Column(db.String(100), nullable=False, default='Definitely Yes (Highly Recommended)')
+    comments = db.Column(db.Text, nullable=True, default='')
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name or 'Anonymous Reviewer',
+            'q1_rating': self.q1_rating or '5 Stars - Excellent',
+            'q2_tracking': self.q2_tracking or 'Very smooth & responsive',
+            'q3_module': self.q3_module or 'Rehab Games',
+            'q4_ai_coach': self.q4_ai_coach or 'Very helpful',
+            'q5_usability': self.q5_usability or 'Super easy & intuitive',
+            'q6_recommend': self.q6_recommend or 'Definitely Yes',
+            'comments': self.comments or '',
+            'created_at': self.created_at.strftime('%b %d, %Y %I:%M %p') if self.created_at else 'Recent'
+        }
