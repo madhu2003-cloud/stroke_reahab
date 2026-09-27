@@ -211,6 +211,24 @@ export function initAiAdvisor() {
       • <strong>T (Time to Call Emergency):</strong> If any of these are present, call emergency services (911 / 112) immediately! Use the <strong>Emergency SOS</strong> tab in your sidebar.`;
     }
 
+    // ── 4.5 Plain-English Guide: How Exercises Help in Real Life ──
+    if (q.includes('how') && (q.includes('help') || q.includes('work') || q.includes('exercise') || q.includes('game') || q.includes('cure') || q.includes('recover'))) {
+      return `🌟 <strong>How These 6 Exercises Help You In Real Daily Life:</strong><br/><br/>
+      After a stroke, the brain loses the connection to your muscles. Repeating these exercises forces your brain to build <strong>new wiring</strong> so you can do daily tasks independently:<br/><br/>
+      1. 🎹 <strong>Piano Finger Tapping:</strong> Helps you open and move 1 finger at a time so your hand doesn't stay stuck in a tight fist.<br/>
+      <em>Real-life goal:</em> Typing on a phone, picking up coins, holding a fork.<br/><br/>
+      2. 🔐 <strong>Knob & Key Turning:</strong> Trains your wrist to rotate left and right.<br/>
+      <em>Real-life goal:</em> Turning a door key, opening a water bottle cap, turning a water tap.<br/><br/>
+      3. 📌 <strong>9-Hole Pegboard Pinch:</strong> Trains your thumb and index finger to pinch small things tightly and let go.<br/>
+      <em>Real-life goal:</em> Holding a pen, buttoning a shirt, holding pills.<br/><br/>
+      4. 🗄️ <strong>Shelf Reaching:</strong> Stretches tight elbow muscles and builds shoulder strength to lift your arm high.<br/>
+      <em>Real-life goal:</em> Taking a cup from a high cupboard, combing your hair, putting on a shirt.<br/><br/>
+      5. 🪟 <strong>Window Wipe:</strong> Loosens stiff, frozen shoulder and chest muscles through wide arm sweeps.<br/>
+      <em>Real-life goal:</em> Wiping a table, bathing, reaching across the bed.<br/><br/>
+      6. 🪞 <strong>Facial Mirror:</strong> Rebuilds muscle strength on the drooping side of your face.<br/>
+      <em>Real-life goal:</em> Speaking clearly, smiling, eating without spilling water.`;
+    }
+
     // ── 5. Hand & Finger Mobility ──
     if (q.includes('stiff') || q.includes('hand') || q.includes('finger') || q.includes('pinch') || q.includes('wrist') || q.includes('piano') || q.includes('grip')) {
       return `🤲 <strong>Hand & Finger Mobility Recommendations:</strong><br/>
