@@ -88,16 +88,16 @@ def generate_clinical_response(query):
             "📅 <strong>Your Personalized Daily Stroke Recovery Plan:</strong><br/><br/>"
             "Physiotherapists recommend <strong>3 short sessions of 15 minutes</strong> daily to drive neuroplasticity without muscle exhaustion:<br/><br/>"
             "🌅 <strong>Morning (15 mins) — Fine Motor & Fingers:</strong><br/>"
-            "• 5 mins warm towel compress on your hand.<br/>
-            "• 2 rounds of <em>Piano Finger Independence</em>.<br/>
+            "• 5 mins warm towel compress on your hand.<br/>"
+            "• 2 rounds of <em>Piano Finger Independence</em>.<br/>"
             "• 2 rounds of <em>9-Hole Pegboard Pincer Test</em>.<br/><br/>"
             "☀️ <strong>Afternoon (15 mins) — Arm & Shoulder Reach:</strong><br/>"
-            "• 2 rounds of <em>Forearm Knob & Key Turning</em>.<br/>
-            "• 2 rounds of <em>Shelf Reaching & Stacking</em>.<br/>
+            "• 2 rounds of <em>Forearm Knob & Key Turning</em>.<br/>"
+            "• 2 rounds of <em>Shelf Reaching & Stacking</em>.<br/>"
             "• 1 round of <em>Planar Window Sweep</em>.<br/><br/>"
             "🌙 <strong>Evening (15 mins) — Speech, Face & Progress Test:</strong><br/>"
-            "• 1 round of <em>Facial Symmetry Biofeedback</em>.<br/>
-            "• 5 mins in the <em>Speech Therapy Lab</em>.<br/>
+            "• 1 round of <em>Facial Symmetry Biofeedback</em>.<br/>"
+            "• 5 mins in the <em>Speech Therapy Lab</em>.<br/>"
             "• Test joint angles in <em>ROM & Tremor Lab</em> to log your recovery streak! 🔥"
         )
 
