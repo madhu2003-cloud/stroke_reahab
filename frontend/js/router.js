@@ -1,26 +1,26 @@
 /* Router Implementation */
 import Auth from './auth.js';
-import renderLanding, { initLanding } from './pages/landing.js';
-import renderLogin, { initLogin } from './pages/login.js';
-import renderRegister, { initRegister } from './pages/register.js';
-import renderPatientDashboard, { initPatientDashboard } from './pages/patientDashboard.js';
-import renderParentDashboard, { initParentDashboard } from './pages/parentDashboard.js';
-import renderDoctorDashboard, { initDoctorDashboard } from './pages/doctorDashboard.js';
-import renderGamesPage, { initGamesPage } from './pages/gamesPage.js';
-import renderGamePage, { initGamePage } from './pages/gamePage.js';
-import renderProgress, { initProgress } from './pages/progress.js';
-import renderHistory, { initHistory } from './pages/history.js';
-import renderStreakPage, { initStreakPage } from './pages/streakPage.js';
-import renderProfile, { initProfile } from './pages/profile.js';
-import renderSettings, { initSettings } from './pages/settings.js';
-import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js';
-import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js';
-import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js';
-import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js';
-import renderSosPage, { initSosPage } from './pages/sosPage.js';
-import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js';
-import renderExportReport, { initExportReport } from './pages/exportReport.js';
-import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js';
+import renderLanding, { initLanding } from './pages/landing.js?v=5.0';
+import renderLogin, { initLogin } from './pages/login.js?v=5.0';
+import renderRegister, { initRegister } from './pages/register.js?v=5.0';
+import renderPatientDashboard, { initPatientDashboard } from './pages/patientDashboard.js?v=5.0';
+import renderParentDashboard, { initParentDashboard } from './pages/parentDashboard.js?v=5.0';
+import renderDoctorDashboard, { initDoctorDashboard } from './pages/doctorDashboard.js?v=5.0';
+import renderGamesPage, { initGamesPage } from './pages/gamesPage.js?v=5.0';
+import renderGamePage, { initGamePage } from './pages/gamePage.js?v=5.0';
+import renderProgress, { initProgress } from './pages/progress.js?v=5.0';
+import renderHistory, { initHistory } from './pages/history.js?v=5.0';
+import renderStreakPage, { initStreakPage } from './pages/streakPage.js?v=5.0';
+import renderProfile, { initProfile } from './pages/profile.js?v=5.0';
+import renderSettings, { initSettings } from './pages/settings.js?v=5.0';
+import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js?v=5.0';
+import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js?v=5.0';
+import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js?v=5.0';
+import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js?v=5.0';
+import renderSosPage, { initSosPage } from './pages/sosPage.js?v=5.0';
+import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=5.0';
+import renderExportReport, { initExportReport } from './pages/exportReport.js?v=5.0';
+import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=5.0';
 import { renderSidebar, initSidebar } from './components/sidebar.js';
 
 export default class Router {
