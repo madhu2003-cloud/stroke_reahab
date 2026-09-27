@@ -23,6 +23,7 @@ def create_app():
     from routes.patients import patients_bp
     from routes.progress import progress_bp
     from routes.profile import profile_bp
+    from routes.ai import ai_bp
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(dashboard_bp, url_prefix='/api/dashboard')
@@ -30,6 +31,7 @@ def create_app():
     app.register_blueprint(patients_bp, url_prefix='/api/patients')
     app.register_blueprint(progress_bp, url_prefix='/api/progress')
     app.register_blueprint(profile_bp, url_prefix='/api/profile')
+    app.register_blueprint(ai_bp, url_prefix='/api/ai')
 
     with app.app_context():
         db.create_all()

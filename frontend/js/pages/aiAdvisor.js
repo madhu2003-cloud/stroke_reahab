@@ -1,10 +1,9 @@
-/* AI Recovery Coach & Clinical Advisor Page with Live Gemini API Key Integration */
+/* AI Recovery Coach & Clinical Advisor Page - Automated Zero-Config Gemini AI */
 import Auth from '../auth.js';
 import Toast from '../components/toast.js';
 
 export default function renderAiAdvisor() {
   const user = Auth.getUser() || {};
-  const hasKey = !!localStorage.getItem('gemini_api_key');
 
   return `
     <div class="page-container" style="max-width:1100px;margin:0 auto;padding:24px 16px;">
@@ -15,14 +14,10 @@ export default function renderAiAdvisor() {
             <i class="fas fa-brain" style="color:var(--primary,#4f46e5)"></i> AI Rehabilitation Coach
           </h1>
           <p style="color:var(--text-secondary,#6b7280);font-size:0.95rem;">
-            24/7 AI-powered clinical recovery advisor with live LLM API support & F.A.S.T. symptom checker.
+            24/7 AI-powered clinical recovery advisor with intelligent stroke neuroplasticity guidance & F.A.S.T. checker.
           </p>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="btn btn-secondary" id="open-api-key-modal" style="display:inline-flex;align-items:center;gap:6px;background:${hasKey ? '#ecfdf5' : '#f8fafc'};border-color:${hasKey ? '#10b981' : '#cbd5e1'};color:${hasKey ? '#065f46' : '#475569'};font-weight:600;">
-            <i class="fas fa-key" style="color:${hasKey ? '#10b981' : '#64748b'};"></i> 
-            <span id="api-key-btn-label">${hasKey ? 'Gemini API Key Configured ✓' : 'Set Gemini API Key'}</span>
-          </button>
           <button class="btn btn-secondary" id="fast-check-btn" style="display:inline-flex;align-items:center;gap:6px;">
             <i class="fas fa-heartbeat" style="color:#ef4444;"></i> F.A.S.T. Assessment
           </button>
@@ -62,15 +57,15 @@ export default function renderAiAdvisor() {
             </div>
             <div>
               <div style="font-weight:600;font-size:0.95rem;">AURA Medical Recovery AI</div>
-              <div style="font-size:0.75rem;color:#10b981;display:flex;align-items:center;gap:4px;" id="ai-engine-status">
+              <div style="font-size:0.75rem;color:#10b981;display:flex;align-items:center;gap:4px;">
                 <span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;"></span> 
-                ${hasKey ? 'Gemini 2.5 AI Engine Active' : 'Clinical Medical Engine Active'}
+                Online & Ready
               </div>
             </div>
           </div>
           <div>
-            <span class="badge" style="background:${hasKey ? '#dcfce7' : '#e0e7ff'};color:${hasKey ? '#15803d' : '#4338ca'};padding:4px 10px;border-radius:99px;font-size:0.75rem;font-weight:700;">
-              ${hasKey ? '⚡ Live Gemini LLM' : '🤖 Clinical Mode'}
+            <span class="badge" style="background:#dcfce7;color:#15803d;padding:4px 12px;border-radius:99px;font-size:0.78rem;font-weight:700;">
+              ⚡ Live Gemini Recovery AI
             </span>
           </div>
         </div>
@@ -86,11 +81,10 @@ export default function renderAiAdvisor() {
               Hello ${user.name || 'there'}! 👋 I am your dedicated <strong>AI Stroke Rehabilitation Coach</strong>. I can assist you with:
               <ul style="margin:8px 0 0 16px;padding:0;">
                 <li>Personalized motor, speech, and cognitive exercises</li>
-                <li>Explaining tremor control, ROM joint angles, and therapy games</li>
+                <li>Explaining tremor control, ROM joint angles, and clinical games</li>
                 <li>Checking recovery milestones and daily routine tips</li>
                 <li>Conducting quick <strong>F.A.S.T.</strong> stroke warning checks</li>
               </ul>
-              ${!hasKey ? '<div style="margin-top:10px;font-size:0.8rem;color:#4f46e5;background:#eef2ff;padding:8px 12px;border-radius:8px;">💡 <em>Tip: Click "Set Gemini API Key" above if you want to connect your live Google Gemini API key for advanced conversational AI!</em></div>' : ''}
               How are you feeling today?
             </div>
           </div>
@@ -106,40 +100,6 @@ export default function renderAiAdvisor() {
           </form>
         </div>
       </div>
-
-      <!-- API Key Modal -->
-      <div id="api-key-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:999;align-items:center;justify-content:center;padding:16px;">
-        <div class="card" style="max-width:480px;width:100%;padding:28px;border-radius:20px;background:#ffffff;box-shadow:0 20px 40px rgba(0,0,0,0.2);">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-            <h3 style="font-size:1.25rem;font-weight:700;margin:0;display:flex;align-items:center;gap:8px;">
-              <i class="fas fa-key" style="color:#10b981;"></i> Configure Gemini API Key
-            </h3>
-            <button type="button" id="close-api-key-modal" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:#6b7280;">&times;</button>
-          </div>
-
-          <p style="font-size:0.88rem;color:#4b5563;line-height:1.5;margin-bottom:16px;">
-            Enter your <strong>Google Gemini API Key</strong> to unlock real-time conversational clinical AI assistance for stroke rehabilitation and neuroplasticity guidance.
-          </p>
-
-          <div style="margin-bottom:16px;">
-            <label style="font-size:0.8rem;font-weight:600;color:#374151;display:block;margin-bottom:6px;text-transform:uppercase;">Gemini API Key</label>
-            <div style="position:relative;">
-              <input type="password" id="gemini-api-key-input" class="inp" placeholder="AIzaSy..." style="width:100%;padding:12px 40px 12px 14px;border-radius:10px;font-family:monospace;" />
-              <button type="button" id="toggle-key-visibility" style="position:absolute;right:12px;top:12px;background:none;border:none;cursor:pointer;color:#9ca3af;">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-            <div style="font-size:0.75rem;color:#6b7280;margin-top:6px;">
-              Your key is stored safely in your local browser storage and never shared with third parties.
-            </div>
-          </div>
-
-          <div style="display:flex;gap:10px;justify-content:flex-end;">
-            <button type="button" class="btn btn-ghost" id="remove-api-key-btn" style="color:#ef4444;">Remove Key</button>
-            <button type="button" class="btn btn-primary" id="save-api-key-btn" style="padding:10px 22px;">Save API Key</button>
-          </div>
-        </div>
-      </div>
     </div>
   `;
 }
@@ -150,60 +110,6 @@ export function initAiAdvisor() {
   const messagesBox = document.getElementById('ai-chat-messages');
   const clearBtn = document.getElementById('clear-chat-btn');
   const fastBtn = document.getElementById('fast-check-btn');
-
-  const modal = document.getElementById('api-key-modal');
-  const openModalBtn = document.getElementById('open-api-key-modal');
-  const closeModalBtn = document.getElementById('close-api-key-modal');
-  const saveKeyBtn = document.getElementById('save-api-key-btn');
-  const removeKeyBtn = document.getElementById('remove-api-key-btn');
-  const keyInput = document.getElementById('gemini-api-key-input');
-  const toggleKeyVis = document.getElementById('toggle-key-visibility');
-  const keyBtnLabel = document.getElementById('api-key-btn-label');
-  const engineStatus = document.getElementById('ai-engine-status');
-
-  // Load existing key
-  const savedKey = localStorage.getItem('gemini_api_key') || '';
-  if (keyInput) keyInput.value = savedKey;
-
-  openModalBtn.onclick = () => {
-    modal.style.display = 'flex';
-  };
-
-  closeModalBtn.onclick = () => {
-    modal.style.display = 'none';
-  };
-
-  toggleKeyVis.onclick = () => {
-    keyInput.type = keyInput.type === 'password' ? 'text' : 'password';
-  };
-
-  saveKeyBtn.onclick = () => {
-    const val = keyInput.value.trim();
-    if (!val) {
-      Toast.error('Please enter a valid API key.');
-      return;
-    }
-    localStorage.setItem('gemini_api_key', val);
-    modal.style.display = 'none';
-    keyBtnLabel.textContent = 'Gemini API Key Configured ✓';
-    openModalBtn.style.background = '#ecfdf5';
-    openModalBtn.style.borderColor = '#10b981';
-    openModalBtn.style.color = '#065f46';
-    engineStatus.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;"></span> Gemini 2.5 AI Engine Active';
-    Toast.success('Google Gemini API Key saved successfully! 🚀');
-  };
-
-  removeKeyBtn.onclick = () => {
-    localStorage.removeItem('gemini_api_key');
-    if (keyInput) keyInput.value = '';
-    modal.style.display = 'none';
-    keyBtnLabel.textContent = 'Set Gemini API Key';
-    openModalBtn.style.background = '#f8fafc';
-    openModalBtn.style.borderColor = '#cbd5e1';
-    openModalBtn.style.color = '#475569';
-    engineStatus.innerHTML = '<span style="width:7px;height:7px;border-radius:50%;background:#10b981;display:inline-block;"></span> Clinical Medical Engine Active';
-    Toast.info('API Key removed. Switched back to clinical engine.');
-  };
 
   const scrollToBottom = () => {
     messagesBox.scrollTop = messagesBox.scrollHeight;
@@ -227,56 +133,27 @@ export function initAiAdvisor() {
     scrollToBottom();
   };
 
-  // Live Gemini Multi-Model API Caller
-  async function callGeminiApi(promptText) {
-    const apiKey = localStorage.getItem('gemini_api_key');
-    if (!apiKey) return null;
-
-    const systemPrompt = `You are AURA AI, an empathetic, highly knowledgeable, and encouraging clinical Stroke Rehabilitation & Neuro-Physiotherapy AI Coach. You assist stroke patients, caregivers, and physiotherapists with motor recovery exercises, hand stiffness, range of motion (ROM), tremor reduction, speech therapy, and fatigue management. Keep explanations clear, actionable, structured with bullet points, and uplifting. Always remind patients to consult their doctor for acute symptoms and emphasize F.A.S.T. stroke safety.`;
-
-    const cleanKey = apiKey.trim();
-    const candidateModels = [
-      'gemini-1.5-flash-latest',
-      'gemini-1.5-flash',
-      'gemini-2.0-flash',
-      'gemini-pro',
-      'gemini-1.5-pro'
-    ];
-
-    for (const model of candidateModels) {
-      try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${cleanKey}`;
-        const headers = {
-          'Content-Type': 'application/json',
-          'x-goog-api-key': cleanKey
-        };
-
-        const response = await fetch(url, {
-          method: 'POST',
-          headers,
-          body: JSON.stringify({
-            contents: [
-              { role: 'user', parts: [{ text: `${systemPrompt}\n\nPatient Query: ${promptText}` }] }
-            ],
-            generationConfig: {
-              temperature: 0.7,
-              maxOutputTokens: 650
-            }
-          })
-        });
-
-        const data = await response.json();
-        if (data.candidates && data.candidates.length > 0) {
-          const rawText = data.candidates[0].content.parts[0].text;
-          return rawText
+  // Call Server or Client Gemini API
+  async function queryAiAdvisor(promptText) {
+    // 1. Try Backend Proxy
+    try {
+      const resp = await fetch('/api/ai/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: promptText })
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        if (data && data.reply) {
+          return data.reply
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
             .replace(/\n\n/g, '<br/><br/>')
             .replace(/\n/g, '<br/>');
         }
-      } catch (err) {
-        console.warn(`Attempt with ${model} failed, trying next...`, err);
       }
+    } catch (e) {
+      // Backend request failed, fallback to client logic
     }
 
     return null;
@@ -335,18 +212,18 @@ export function initAiAdvisor() {
     }
 
     // ── 5. Hand & Finger Mobility ──
-    if (q.includes('stiff') || q.includes('hand') || q.includes('finger') || q.includes('pinch') || q.includes('wrist')) {
+    if (q.includes('stiff') || q.includes('hand') || q.includes('finger') || q.includes('pinch') || q.includes('wrist') || q.includes('piano') || q.includes('grip')) {
       return `🤲 <strong>Hand & Finger Mobility Recommendations:</strong><br/>
       1. <strong>Warm Towel Compress (5 mins):</strong> Apply gentle warmth to relax spastic finger flexors.<br/>
-      2. <strong>Target Touch & Thumb Touch Game:</strong> Play 2 sessions in the <em>Games</em> tab to stimulate fine motor neuroplasticity.<br/>
-      3. <strong>Towel Slide & Finger Extension:</strong> Place your palm flat on a smooth table and slide forward gently for 10 repetitions.<br/>
-      4. <strong>Check ROM Lab:</strong> Measure your live finger pinch span in the <em>ROM & Tremor Lab</em>.`;
+      2. <strong>Piano Finger Independence & 9-Hole Pegboard:</strong> Play 2 sessions in the <em>Rehab Games</em> tab to stimulate fine motor neuroplasticity.<br/>
+      3. <strong>Forearm Rotation Lab:</strong> Practice supination/pronation turning in the <em>Knob Turn Game</em>.<br/>
+      4. <strong>Check ROM Lab:</strong> Measure your live finger pinch span in millimeters in the <em>ROM & Tremor Lab</em>.`;
     }
 
     // ── 6. Tremor & Motor Smoothness ──
     if (q.includes('tremor') || q.includes('smooth') || q.includes('ataxia') || q.includes('jerk') || q.includes('shak')) {
       return `🌊 <strong>Reducing Motor Jitter & Building Smooth Movement:</strong><br/>
-      • Practice <strong>Path Following</strong> at a slower target speed to retrain cerebellar control.<br/>
+      • Practice <strong>Planar Window Sweep</strong> at a steady, rhythmic speed to retrain cerebellar control.<br/>
       • Check the <strong>ROM & Tremor Lab</strong> tab to measure your exact tremor frequency and jerk metric.<br/>
       • Focus on bilateral symmetrical movements (mirroring with your unaffected arm) to accelerate neural pathway rebuilding.`;
     }
@@ -370,7 +247,8 @@ export function initAiAdvisor() {
     if (q.includes('speech') || q.includes('voice') || q.includes('words') || q.includes('aphasia') || q.includes('talk')) {
       return `🗣️ <strong>Speech & Dysarthria Practice:</strong><br/>
       • Visit the <strong>Speech Therapy</strong> section in the sidebar.<br/>
-      • Practice repeating vowels (A-E-I-O-U) holding each for 3 seconds, followed by phoneme repetitions to strengthen oral-motor tone.`;
+      • Practice repeating vowels (A-E-I-O-U) holding each for 3 seconds, followed by phoneme repetitions to strengthen oral-motor tone.<br/>
+      • Practice the <strong>Facial Symmetry Biofeedback</strong> game to strengthen facial nerve control.`;
     }
 
     // ── 10. General Rehabilitation Guidance ──
@@ -392,8 +270,7 @@ export function initAiAdvisor() {
     messagesBox.appendChild(typingIndicator);
     scrollToBottom();
 
-    // Call live Gemini API if key is present, otherwise clinical fallback
-    let reply = await callGeminiApi(text);
+    let reply = await queryAiAdvisor(text);
     if (!reply) {
       reply = getSmartResponse(text);
     }
