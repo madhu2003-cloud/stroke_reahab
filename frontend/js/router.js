@@ -17,7 +17,6 @@ import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js
 import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js?v=5.0';
 import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js?v=5.0';
 import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js?v=5.0';
-import renderSosPage, { initSosPage } from './pages/sosPage.js?v=5.0';
 import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=5.0';
 import renderExportReport, { initExportReport } from './pages/exportReport.js?v=5.0';
 import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=5.0';
@@ -164,7 +163,6 @@ export function setupRouter() {
   router.addRoute('#/ai-advisor', renderAiAdvisor, initAiAdvisor, { protected: true, withSidebar: true });
   router.addRoute('#/rom-analyzer', renderRomAnalyzer, initRomAnalyzer, { protected: true, withSidebar: true });
   router.addRoute('#/speech-therapy', renderSpeechTherapy, initSpeechTherapy, { protected: true, withSidebar: true });
-  router.addRoute('#/sos', renderSosPage, initSosPage, { protected: true, withSidebar: true });
   router.addRoute('#/prescriptions', renderPrescriptionsPage, initPrescriptionsPage, { protected: true, withSidebar: true });
   router.addRoute('#/export-report', renderExportReport, initExportReport, { protected: true, withSidebar: true });
   router.addRoute('#/cheering', renderCheeringPage, initCheeringPage, { protected: true, withSidebar: true });

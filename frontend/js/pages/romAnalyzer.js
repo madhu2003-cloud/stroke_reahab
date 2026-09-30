@@ -82,7 +82,7 @@ export default function renderRomAnalyzer() {
               <label style="font-size:0.85rem;color:var(--text-secondary,#6b7280);display:block;margin-bottom:6px;">Select Joint to Test:</label>
               <select id="rom-joint-select" class="inp" style="width:100%;padding:10px;border-radius:10px;font-weight:600;color:#38bdf8;background:#1e293b;">
                 <option value="wrist" selected>Wrist Flexion & Extension (0° - 145°)</option>
-                <option value="finger">Finger Pinch & Span (0° - 60°)</option>
+                <option value="finger">Finger Pinch & Span (0mm - 160mm)</option>
                 <option value="arm">Arm Elevation & Reach (0° - 180°)</option>
               </select>
             </div>
@@ -156,10 +156,10 @@ export function initRomAnalyzer() {
       unit: '°'
     },
     finger: {
-      title: 'Pinch Aperture & Span',
-      target: 'Target: 40mm - 60mm (Thumb-Index Pinch Span)',
+      title: 'Pinch Aperture & Hand Span',
+      target: 'Target: 40mm - 140mm (Thumb-Index Pinch Span)',
       instructions: 'Bring your thumb and index finger together to pinch, then open them wide to test fine motor span.',
-      maxAngle: 60,
+      maxAngle: 160,
       unit: 'mm'
     },
     arm: {
@@ -361,8 +361,17 @@ export function initRomAnalyzer() {
         // ── Finger Pinch Distance: Thumb (4) to Index (8) ──
         const thumb = mirroredLandmarks[4];
         const index = mirroredLandmarks[8];
-        const pinchDist = Math.hypot(thumb.x - index.x, thumb.y - index.y);
-        currentAngle = Math.round(Math.min(60, Math.max(5, pinchDist / 3)));
+        const wrist = mirroredLandmarks[0];
+        const knuckle = mirroredLandmarks[9]; // Middle finger MCP joint
+
+        // Real-world human hand scale calibration:
+        // Distance from wrist (0) to middle MCP knuckle (9) is approx 85-90mm in human adults
+        const handScalePx = Math.max(25, Math.hypot(knuckle.x - wrist.x, knuckle.y - wrist.y));
+        const pinchDistPx = Math.hypot(thumb.x - index.x, thumb.y - index.y);
+
+        // Calculate dynamic metric millimeters
+        const pinchMm = Math.round((pinchDistPx / handScalePx) * 90);
+        currentAngle = Math.max(0, Math.min(config.maxAngle, pinchMm));
 
         // Draw Pinch Laser Line
         ctx.strokeStyle = '#f43f5e';
@@ -515,7 +524,7 @@ export function initRomAnalyzer() {
 
     if (mode === 'finger') {
       // ── Finger Pinch & Span Simulator ──
-      const pinchSpan = Math.round(15 + (Math.sin(time * 2) + 1) * 20); // 15mm to 55mm
+      const pinchSpan = Math.round(15 + (Math.sin(time * 2) + 1) * 55); // 15mm to 125mm
       const palmX = canvas.width / 2;
       const palmY = canvas.height / 2 + 60;
 
@@ -529,8 +538,8 @@ export function initRomAnalyzer() {
       ctx.stroke();
 
       // Thumb
-      const thumbTipX = palmX - 45 - (pinchSpan * 0.8);
-      const thumbTipY = palmY - 60 - (pinchSpan * 0.5);
+      const thumbTipX = palmX - 45 - (pinchSpan * 0.45);
+      const thumbTipY = palmY - 60 - (pinchSpan * 0.3);
       ctx.strokeStyle = '#f43f5e';
       ctx.lineWidth = 8;
       ctx.beginPath();
@@ -543,8 +552,8 @@ export function initRomAnalyzer() {
       ctx.fill();
 
       // Index Finger
-      const indexTipX = palmX + 45 + (pinchSpan * 0.8);
-      const indexTipY = palmY - 60 - (pinchSpan * 0.5);
+      const indexTipX = palmX + 45 + (pinchSpan * 0.45);
+      const indexTipY = palmY - 60 - (pinchSpan * 0.3);
       ctx.strokeStyle = '#10b981';
       ctx.lineWidth = 8;
       ctx.beginPath();
@@ -573,7 +582,7 @@ export function initRomAnalyzer() {
       angleVal.textContent = `${pinchSpan} mm`;
       smoothVal.textContent = (0.55 + Math.sin(time) * 0.08).toFixed(2);
       tremorVal.textContent = (0.9 + Math.cos(time * 2) * 0.2).toFixed(1) + ' Hz';
-      scoreVal.textContent = Math.round(75 + (pinchSpan / 60) * 22) + '%';
+      scoreVal.textContent = Math.round(70 + (Math.min(pinchSpan, 120) / 120) * 25) + '%';
 
     } else {
       // ── Wrist / Arm Elevation Simulator ──

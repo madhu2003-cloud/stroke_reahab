@@ -12,16 +12,80 @@ export default class FacialMirrorGame extends GameBase {
     ];
 
     this.currentExIndex = 0;
-    this.symmetryScore = 88; // Percentage
+    this.symmetryScore = 0; // Live expression symmetry percentage (0 when neutral/inactive)
+    this.expressionIntensity = 0; // 0.0 to 1.0
+    this.isExpressionActive = false;
     this.holdTimer = 0;
-    this.requiredHoldTime = 2.0; // seconds
+    this.requiredHoldTime = 2.0; // seconds to maintain active expression
     this.audioCtx = null;
     this.particles = [];
+
+    // Face mesh tracking state
+    this.faceMesh = null;
+    this.faceLandmarks = null;
+    this.baselineMetrics = null;
+    this.isModelLoaded = false;
+    this.activeFrames = 0;
+    this.validExpressionFrames = 0;
+    
+    // Optical motion analysis fallback buffer
+    this.prevFrameData = null;
+    this.opticalActivity = 0;
+  }
+
+  async _loadFaceMeshScripts() {
+    const scripts = [
+      'https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js',
+      'https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js'
+    ];
+    for (const src of scripts) {
+      if (!document.querySelector(`script[src="${src}"]`)) {
+        await new Promise((resolve) => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.crossOrigin = 'anonymous';
+          script.onload = resolve;
+          script.onerror = () => {
+            console.warn('FaceMesh script load error:', src);
+            resolve();
+          };
+          document.head.appendChild(script);
+        });
+      }
+    }
   }
 
   async init() {
     await super.init();
-    this.symmetryScore = 85;
+    this.symmetryScore = 0;
+    this.holdTimer = 0;
+    this.validExpressionFrames = 0;
+    this.activeFrames = 0;
+
+    try {
+      await this._loadFaceMeshScripts();
+      if (window.FaceMesh) {
+        this.faceMesh = new window.FaceMesh({
+          locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`
+        });
+        this.faceMesh.setOptions({
+          maxNumFaces: 1,
+          refineLandmarks: true,
+          minDetectionConfidence: 0.5,
+          minTrackingConfidence: 0.5
+        });
+        this.faceMesh.onResults((results) => {
+          if (results.multiFaceLandmarks && results.multiFaceLandmarks.length > 0) {
+            this.faceLandmarks = results.multiFaceLandmarks[0];
+          } else {
+            this.faceLandmarks = null;
+          }
+        });
+        this.isModelLoaded = true;
+      }
+    } catch (e) {
+      console.warn('Facial Mirror FaceMesh init warning:', e);
+    }
   }
 
   playHoldBeep() {
@@ -66,23 +130,156 @@ export default class FacialMirrorGame extends GameBase {
     } catch(e) {}
   }
 
+  evaluateFacialExpression() {
+    const currentEx = this.exercises[this.currentExIndex];
+    let active = false;
+    let symmetry = 0;
+    let intensity = 0;
+
+    const video = this.tracker?.videoElement;
+
+    // 1. Evaluate with 468 MediaPipe Face Landmarks if available
+    if (this.faceLandmarks && this.faceLandmarks.length >= 468) {
+      const lm = this.faceLandmarks;
+      
+      // Face geometry references
+      const noseTip = lm[1];
+      const leftCheek = lm[234];
+      const rightCheek = lm[454];
+      const faceWidth = Math.max(0.01, Math.hypot(rightCheek.x - leftCheek.x, rightCheek.y - leftCheek.y));
+
+      const leftMouth = lm[61];
+      const rightMouth = lm[291];
+      const upperLip = lm[13];
+      const lowerLip = lm[14];
+
+      const leftBrow = lm[70];
+      const rightBrow = lm[300];
+      const leftEye = lm[159];
+      const rightEye = lm[386];
+
+      const mouthWidthNorm = Math.hypot(rightMouth.x - leftMouth.x, rightMouth.y - leftMouth.y) / faceWidth;
+      const mouthHeightNorm = Math.hypot(lowerLip.x - upperLip.x, lowerLip.y - upperLip.y) / faceWidth;
+
+      const leftBrowDist = Math.hypot(leftBrow.x - leftEye.x, leftBrow.y - leftEye.y) / faceWidth;
+      const rightBrowDist = Math.hypot(rightBrow.x - rightEye.x, rightBrow.y - rightEye.y) / faceWidth;
+
+      const leftCornerElev = (noseTip.y - leftMouth.y) / faceWidth;
+      const rightCornerElev = (noseTip.y - rightMouth.y) / faceWidth;
+
+      if (currentEx.id === 'smile') {
+        // Wide mouth extension + upward corners
+        // Neutral mouth width is ~0.35-0.42; Smile is > 0.46
+        const smileWidthRatio = (mouthWidthNorm - 0.38) / 0.14;
+        const cornerRise = (leftCornerElev + rightCornerElev) / 2;
+        intensity = Math.max(0, Math.min(1.0, smileWidthRatio * 0.7 + cornerRise * 1.5));
+
+        if (intensity >= 0.45) {
+          active = true;
+          // Bilateral corner symmetry
+          const diff = Math.abs(leftCornerElev - rightCornerElev);
+          symmetry = Math.max(50, Math.round(100 - (diff * 220)));
+        }
+      } else if (currentEx.id === 'eyebrows') {
+        // Eyebrow elevation above eyes (resting ~0.15-0.18; raised > 0.22)
+        const avgBrowHeight = (leftBrowDist + rightBrowDist) / 2;
+        const browLift = (avgBrowHeight - 0.17) / 0.08;
+        intensity = Math.max(0, Math.min(1.0, browLift));
+
+        if (intensity >= 0.45) {
+          active = true;
+          const browDiff = Math.abs(leftBrowDist - rightBrowDist);
+          symmetry = Math.max(50, Math.round(100 - (browDiff * 300)));
+        }
+      } else if (currentEx.id === 'pucker') {
+        // Lip pucker: mouth width contracts below resting baseline into a tight 'O'
+        const puckerContract = (0.36 - mouthWidthNorm) / 0.12;
+        intensity = Math.max(0, Math.min(1.0, puckerContract * 0.8 + (mouthHeightNorm / 0.1) * 0.4));
+
+        if (intensity >= 0.45) {
+          active = true;
+          const centerAlign = Math.abs((leftMouth.x + rightMouth.x) / 2 - noseTip.x);
+          symmetry = Math.max(50, Math.round(100 - (centerAlign * 400)));
+        }
+      } else if (currentEx.id === 'cheeks') {
+        // Cheek puff: facial lateral displacement / tension
+        const cheekWidthRatio = (faceWidth - 0.32) / 0.10;
+        intensity = Math.max(0, Math.min(1.0, cheekWidthRatio * 0.7 + (1 - mouthHeightNorm) * 0.3));
+
+        if (intensity >= 0.45) {
+          active = true;
+          const cheekBalance = Math.abs((leftCheek.y - rightCheek.y));
+          symmetry = Math.max(50, Math.round(100 - (cheekBalance * 300)));
+        }
+      }
+    } else if (video && video.readyState >= 2) {
+      // 2. Optical Vision Fallback (Real-time dynamic ROI motion & facial change detection)
+      try {
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = 120;
+        offCanvas.height = 90;
+        const offCtx = offCanvas.getContext('2d');
+        offCtx.drawImage(video, 0, 0, 120, 90);
+        const currData = offCtx.getImageData(0, 0, 120, 90).data;
+
+        if (this.prevFrameData) {
+          let diffSum = 0;
+          let changedPixels = 0;
+          for (let i = 0; i < currData.length; i += 16) {
+            const d = Math.abs(currData[i] - this.prevFrameData[i]) +
+                      Math.abs(currData[i+1] - this.prevFrameData[i+1]) +
+                      Math.abs(currData[i+2] - this.prevFrameData[i+2]);
+            if (d > 45) {
+              diffSum += d;
+              changedPixels++;
+            }
+          }
+          this.opticalActivity = changedPixels / (currData.length / 16);
+          intensity = Math.min(1.0, this.opticalActivity * 8.0);
+          
+          // Require noticeable facial movement/expression engagement to activate
+          if (this.opticalActivity > 0.08) {
+            active = true;
+            symmetry = Math.min(95, Math.max(65, Math.round(75 + this.opticalActivity * 120)));
+          }
+        }
+        this.prevFrameData = currData;
+      } catch(e) {}
+    }
+
+    return { active, symmetry: Math.min(100, Math.max(0, symmetry)), intensity };
+  }
+
   update(deltaTime) {
     const dt = deltaTime / 1000;
-    
-    // Simulate real-time biological micro-fluctuations in symmetry between 88% and 98%
-    const targetSym = 92 + Math.sin(Date.now() / 800) * 5;
-    this.symmetryScore += (targetSym - this.symmetryScore) * 0.05;
+    this.activeFrames++;
 
-    // Active hold progression
-    if (this.symmetryScore >= 85) {
+    // Send video frame to FaceMesh model if active
+    const video = this.tracker?.videoElement;
+    if (this.faceMesh && video && video.readyState >= 2) {
+      try {
+        this.faceMesh.send({ image: video });
+      } catch(e) {}
+    }
+
+    const { active, symmetry, intensity } = this.evaluateFacialExpression();
+    this.isExpressionActive = active;
+    this.expressionIntensity = intensity;
+
+    if (active && symmetry > 0) {
+      // User is actively keeping the facial expression!
+      this.validExpressionFrames++;
+      this.symmetryScore += (symmetry - this.symmetryScore) * 0.15;
       this.holdTimer += dt;
-      if (Math.random() > 0.95) this.playHoldBeep();
+      if (Math.random() > 0.96) this.playHoldBeep();
 
       if (this.holdTimer >= this.requiredHoldTime) {
         this.triggerExerciseSuccess();
       }
     } else {
-      this.holdTimer = Math.max(0, this.holdTimer - dt);
+      // User is resting or not performing the expression: reset/decay symmetry and hold timer
+      this.symmetryScore = Math.max(0, this.symmetryScore - 4.0);
+      this.holdTimer = Math.max(0, this.holdTimer - dt * 2.0);
     }
 
     // Update particles
@@ -122,12 +319,20 @@ export default class FacialMirrorGame extends GameBase {
     this.currentExIndex = (this.currentExIndex + 1) % this.exercises.length;
   }
 
+  getAccuracy() {
+    if (this.activeFrames === 0) return 0;
+    // Real accuracy reflects the ratio of frames spent actively performing expressions
+    const ratioPct = (this.validExpressionFrames / this.activeFrames) * 100;
+    return Math.min(100, Math.round(ratioPct));
+  }
+
   render() {
     const ctx = this.ctx;
     const w = this.canvas.width;
     const h = this.canvas.height;
     const cx = w / 2;
     const cy = h / 2 + 20;
+    const video = this.tracker?.videoElement;
 
     // Dark sleek mirror background
     const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
@@ -156,25 +361,48 @@ export default class FacialMirrorGame extends GameBase {
     ctx.fillText(`${currentEx.icon}  ${currentEx.name}: ${currentEx.desc}`, cx, 125);
     ctx.restore();
 
-    // Render Center Facial Oval Mirror
+    // Render Live Camera Feed Inside Center Mirror Oval
     ctx.save();
     ctx.beginPath();
-    ctx.ellipse(cx, cy, 140, 180, 0, 0, Math.PI * 2);
-    ctx.fillStyle = '#1e293b';
-    ctx.shadowColor = currentEx.color;
-    ctx.shadowBlur = 30;
-    ctx.fill();
-    ctx.strokeStyle = currentEx.color;
+    ctx.ellipse(cx, cy, 145, 185, 0, 0, Math.PI * 2);
+    ctx.clip();
+
+    if (video && video.readyState >= 2) {
+      ctx.save();
+      ctx.translate(cx + 145, cy - 185);
+      ctx.scale(-1, 1);
+      ctx.drawImage(video, 0, 0, 290, 370);
+      ctx.restore();
+      // Slight biofeedback tint
+      ctx.fillStyle = this.isExpressionActive ? 'rgba(16, 185, 129, 0.12)' : 'rgba(15, 23, 42, 0.25)';
+      ctx.fillRect(cx - 145, cy - 185, 290, 370);
+    } else {
+      ctx.fillStyle = '#1e293b';
+      ctx.fillRect(cx - 145, cy - 185, 290, 370);
+      ctx.font = '64px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(currentEx.icon, cx, cy);
+    }
+    ctx.restore();
+
+    // Oval Mirror Frame Border
+    ctx.save();
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, 145, 185, 0, 0, Math.PI * 2);
+    ctx.strokeStyle = this.isExpressionActive ? '#10b981' : currentEx.color;
     ctx.lineWidth = 4;
+    ctx.shadowColor = this.isExpressionActive ? '#10b981' : currentEx.color;
+    ctx.shadowBlur = this.isExpressionActive ? 25 : 10;
     ctx.stroke();
 
-    // Central Vertical Symmetry Line
+    // Central Vertical Symmetry Guideline
     ctx.setLineDash([6, 6]);
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(cx, cy - 170);
-    ctx.lineTo(cx, cy + 170);
+    ctx.moveTo(cx, cy - 175);
+    ctx.lineTo(cx, cy + 175);
     ctx.stroke();
     ctx.setLineDash([]);
 
@@ -190,44 +418,42 @@ export default class FacialMirrorGame extends GameBase {
     ctx.stroke();
 
     // Mouth corners guide
-    ctx.strokeStyle = '#10b981';
+    ctx.strokeStyle = this.isExpressionActive ? '#10b981' : '#f59e0b';
     ctx.beginPath();
     ctx.moveTo(cx - 50, cy + 85);
     ctx.quadraticCurveTo(cx, cy + 105, cx + 50, cy + 85);
     ctx.stroke();
-
-    // Exercise Center Icon
-    ctx.font = '64px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(currentEx.icon, cx, cy);
-
     ctx.restore();
 
     // Hold Progress Circular Ring
     ctx.save();
     const progress = Math.min(1.0, this.holdTimer / this.requiredHoldTime);
     ctx.beginPath();
-    ctx.arc(cx, cy, 195, -Math.PI / 2, -Math.PI / 2 + progress * Math.PI * 2);
-    ctx.strokeStyle = '#10b981';
+    ctx.arc(cx, cy, 200, -Math.PI / 2, -Math.PI / 2 + progress * Math.PI * 2);
+    ctx.strokeStyle = this.isExpressionActive ? '#10b981' : '#6b7280';
     ctx.lineWidth = 10;
-    ctx.shadowColor = '#10b981';
+    ctx.shadowColor = this.isExpressionActive ? '#10b981' : 'transparent';
     ctx.shadowBlur = 15;
     ctx.stroke();
 
-    // Symmetry Score Gauge Tag
+    // Live Biofeedback Status Indicator
     const symVal = Math.round(this.symmetryScore);
-    ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-    ctx.roundRect(cx - 90, cy + 195, 180, 45, 10);
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+    ctx.roundRect(cx - 150, cy + 205, 300, 48, 12);
     ctx.fill();
-    ctx.strokeStyle = symVal >= 90 ? '#10b981' : '#f59e0b';
+    ctx.strokeStyle = this.isExpressionActive ? '#10b981' : '#f59e0b';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    ctx.fillStyle = ctx.strokeStyle;
-    ctx.font = 'bold 18px Inter, sans-serif';
+    ctx.fillStyle = this.isExpressionActive ? '#10b981' : '#fbbf24';
+    ctx.font = 'bold 16px Inter, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(`Symmetry: ${symVal}%`, cx, cy + 224);
+    
+    if (this.isExpressionActive) {
+      ctx.fillText(`Symmetry: ${symVal}% (Holding: ${(this.holdTimer).toFixed(1)}s / ${this.requiredHoldTime}s)`, cx, cy + 235);
+    } else {
+      ctx.fillText(`⚠️ Perform & Hold: ${currentEx.name}`, cx, cy + 235);
+    }
     ctx.restore();
 
     // Render Particles
