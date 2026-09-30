@@ -18,7 +18,7 @@ import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js?v=5.0';
 import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js?v=5.0';
 import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js?v=5.0';
 import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=5.0';
-import renderExportReport, { initExportReport } from './pages/exportReport.js?v=5.0';
+import renderExportReport, { initExportReport } from './pages/exportReport.js?v=7.0';
 import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=5.0';
 import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=6.0';
 import { renderSidebar, initSidebar } from './components/sidebar.js';

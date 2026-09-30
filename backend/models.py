@@ -103,9 +103,18 @@ class ExerciseResult(db.Model):
 
     def to_dict(self):
         game_names = {
+            'piano_tap': 'Piano Finger Independence',
+            'knob_turn': 'Forearm Pronation & Supination',
+            'pegboard_pinch': '9-Hole Pegboard Pincer Test',
+            'shelf_reach': 'Shelf Reaching & Stacking',
+            'window_wipe': 'Planar Window & Surface Sweep',
+            'facial_mirror': 'Facial Symmetry Biofeedback',
             'target_touch': 'Target Touch',
             'object_catch': 'Object Catch',
             'path_following': 'Path Following',
+            'bubble_pop': 'Bubble Pop',
+            'number_show': 'Number Show',
+            'thumb_touch': 'Thumb Opposition Touch',
         }
         return {
             'id': self.id,

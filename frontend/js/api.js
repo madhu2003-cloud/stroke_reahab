@@ -63,6 +63,10 @@ const API = {
   getWeeklyProgress() { return this.get('/progress/weekly'); },
   getMonthlyProgress() { return this.get('/progress/monthly'); },
   getActivityCalendar(days = 30) { return this.get('/progress/activity-calendar?days=' + days); },
+  getClinicalReport(patientId = null) {
+    const q = patientId ? `?patient_id=${patientId}` : '';
+    return this.get('/progress/clinical-report' + q);
+  },
 
   // Patients
   getPatients() { return this.get('/patients'); },
