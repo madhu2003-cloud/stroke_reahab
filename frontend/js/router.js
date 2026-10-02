@@ -1,28 +1,28 @@
 /* Router Implementation */
 import Auth from './auth.js';
-import renderLanding, { initLanding } from './pages/landing.js?v=5.0';
-import renderLogin, { initLogin } from './pages/login.js?v=5.0';
-import renderRegister, { initRegister } from './pages/register.js?v=5.0';
-import renderPatientDashboard, { initPatientDashboard } from './pages/patientDashboard.js?v=5.0';
-import renderParentDashboard, { initParentDashboard } from './pages/parentDashboard.js?v=5.0';
-import renderDoctorDashboard, { initDoctorDashboard } from './pages/doctorDashboard.js?v=5.0';
-import renderGamesPage, { initGamesPage } from './pages/gamesPage.js?v=5.0';
-import renderGamePage, { initGamePage } from './pages/gamePage.js?v=5.0';
-import renderProgress, { initProgress } from './pages/progress.js?v=5.0';
-import renderHistory, { initHistory } from './pages/history.js?v=5.0';
-import renderStreakPage, { initStreakPage } from './pages/streakPage.js?v=5.0';
-import renderProfile, { initProfile } from './pages/profile.js?v=5.0';
-import renderSettings, { initSettings } from './pages/settings.js?v=5.0';
-import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js?v=5.0';
-import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js?v=5.0';
-import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js?v=5.0';
-import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js?v=5.0';
-import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=5.0';
-import renderExportReport, { initExportReport } from './pages/exportReport.js?v=7.0';
-import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=5.0';
-import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=6.0';
-import renderBenchmarkSuite, { initBenchmarkSuite } from './pages/benchmarkSuite.js?v=1.0';
-import { renderSidebar, initSidebar } from './components/sidebar.js';
+import renderLanding, { initLanding } from './pages/landing.js?v=8.0';
+import renderLogin, { initLogin } from './pages/login.js?v=8.0';
+import renderRegister, { initRegister } from './pages/register.js?v=8.0';
+import renderPatientDashboard, { initPatientDashboard } from './pages/patientDashboard.js?v=8.0';
+import renderParentDashboard, { initParentDashboard } from './pages/parentDashboard.js?v=8.0';
+import renderDoctorDashboard, { initDoctorDashboard } from './pages/doctorDashboard.js?v=8.0';
+import renderGamesPage, { initGamesPage } from './pages/gamesPage.js?v=8.0';
+import renderGamePage, { initGamePage } from './pages/gamePage.js?v=8.0';
+import renderProgress, { initProgress } from './pages/progress.js?v=8.0';
+import renderHistory, { initHistory } from './pages/history.js?v=8.0';
+import renderStreakPage, { initStreakPage } from './pages/streakPage.js?v=8.0';
+import renderProfile, { initProfile } from './pages/profile.js?v=8.0';
+import renderSettings, { initSettings } from './pages/settings.js?v=8.0';
+import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js?v=8.0';
+import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js?v=8.0';
+import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js?v=8.0';
+import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js?v=8.0';
+import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=8.0';
+import renderExportReport, { initExportReport } from './pages/exportReport.js?v=8.0';
+import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=8.0';
+import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=8.0';
+import renderBenchmarkSuite, { initBenchmarkSuite } from './pages/benchmarkSuite.js?v=8.0';
+import { renderSidebar, initSidebar } from './components/sidebar.js?v=8.0';
 
 export default class Router {
   constructor(rootId) {
