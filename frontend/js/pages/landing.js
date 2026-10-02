@@ -10,6 +10,7 @@ export default function renderLanding() {
         <li><a href="#/">Home</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#games-preview">Games</a></li>
+        <li><a href="#/benchmark" style="color:#0284c7;font-weight:700;"><i class="fas fa-microscope"></i> Benchmark Lab</a></li>
         <li><a href="#/feedback" style="color:var(--primary,#4f46e5);font-weight:700;"><i class="fas fa-star"></i> Feedback</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>

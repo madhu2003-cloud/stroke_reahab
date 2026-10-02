@@ -16,6 +16,9 @@ export default function renderRomAnalyzer() {
           </p>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="#/benchmark" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:6px;">
+            <i class="fas fa-vial"></i> Dataset Benchmark Lab
+          </a>
           <button class="btn btn-primary" id="start-camera-tracker-btn" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;">
             <i class="fas fa-video"></i> <span id="start-btn-label">Start Camera Tracking</span>
           </button>

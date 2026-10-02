@@ -12,17 +12,17 @@ export default function renderPatientDashboard() {
       <p class="welcome-date" id="dash-date">Ready for today's rehabilitation session?</p>
     </div>
     
-    <div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#ffffff;padding:18px 24px;border-radius:16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:0 8px 20px rgba(79,70,229,0.25);">
+    <div style="background:linear-gradient(135deg,#0284c7,#0369a1);color:#ffffff;padding:16px 22px;border-radius:16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;box-shadow:0 6px 18px rgba(2,132,199,0.25);">
       <div>
-        <div style="font-weight:700;font-size:1.05rem;display:flex;align-items:center;gap:8px;">
-          <i class="fas fa-star" style="color:#facc15;"></i> Testing our Platform? Share Your Experience!
+        <div style="font-weight:700;font-size:1rem;display:flex;align-items:center;gap:8px;">
+          <i class="fas fa-microscope" style="color:#7dd3fc;"></i> Clinical Benchmark & Dataset Validation (Alternative 3)
         </div>
-        <div style="font-size:0.88rem;opacity:0.9;margin-top:2px;">
-          Answer 6 quick multiple-choice questions & tell us what changes you want us to add!
+        <div style="font-size:0.86rem;opacity:0.95;margin-top:2px;">
+          Run kinematic video benchmarks, test tracking against the 15-Patient Cohort matrix, & export validation reports!
         </div>
       </div>
-      <a href="#/feedback" class="btn" style="background:#ffffff;color:#4f46e5;font-weight:700;border-radius:10px;padding:10px 20px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
-        Give Feedback ⭐
+      <a href="#/benchmark" class="btn" style="background:#ffffff;color:#0284c7;font-weight:700;border-radius:10px;padding:9px 18px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+        Open Benchmark Lab 🔬
       </a>
     </div>
     
