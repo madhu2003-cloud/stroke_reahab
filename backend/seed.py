@@ -15,14 +15,12 @@ def hash_pw(pw):
     return bcrypt.hashpw(pw.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
 
-def seed():
-    app = create_app()
-    with app.app_context():
-        if User.query.filter_by(email='patient@demo.com').first():
-            print('Demo data already exists. Skipping seed.')
-            return
+def seed_demo_data():
+    if User.query.filter_by(email='patient@demo.com').first():
+        print('Demo data already exists. Skipping seed.')
+        return
 
-        # Create demo patient
+    # Create demo patient
         patient_user = User(
             name='Alex Demo', email='patient@demo.com',
             password_hash=hash_pw('demo123'), role='patient', phone='1234567890'
@@ -129,5 +127,12 @@ def seed():
         print(f'  Streak:  current={streak_count}, longest={max_streak}')
 
 
+def seed():
+    app = create_app()
+    with app.app_context():
+        seed_demo_data()
+
+
 if __name__ == '__main__':
     seed()
+

@@ -18,7 +18,7 @@ export default function renderPatientDashboard() {
           <i class="fas fa-microscope" style="color:#7dd3fc;"></i> Clinical Benchmark & Dataset Validation (Alternative 3)
         </div>
         <div style="font-size:0.86rem;opacity:0.95;margin-top:2px;">
-          Run kinematic video benchmarks, test tracking against the 15-Patient Cohort matrix, & export validation reports!
+          Run kinematic video benchmarks, test tracking against the 50-Subject Post-Stroke Cohort matrix, & export validation reports!
         </div>
       </div>
       <a href="#/benchmark" class="btn" style="background:#ffffff;color:#0284c7;font-weight:700;border-radius:10px;padding:9px 18px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.1);">

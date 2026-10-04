@@ -37,6 +37,14 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        try:
+            from models import User
+            if not User.query.filter_by(email='patient@demo.com').first():
+                from seed import seed_demo_data
+                seed_demo_data()
+        except Exception as e:
+            print(f'Database auto-init note: {e}')
+
 
     @app.route('/')
     def index():
