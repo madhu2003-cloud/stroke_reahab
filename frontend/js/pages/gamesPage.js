@@ -23,62 +23,66 @@ export default function renderGamesPage() {
 
 export async function initGamesPage() {
   const container = document.getElementById('games-grid-container');
+  
+  // Fetch performance data with a graceful fallback — games must always render
+  let perf = {};
   try {
     const perfData = await API.getGamePerformance();
-    const perf = perfData.performance || {};
-    
-    container.innerHTML = `
-      ${GameCard({
-        type: 'piano_tap',
-        name: 'Piano Finger Independence',
-        description: 'Isolate individual finger flexor/extensor control (Thumb to Pinky) to overcome abnormal post-stroke flexor synergy.',
-        icon: '🎹',
-        lastScore: perf.piano_tap?.best_score ? 'Best: ' + perf.piano_tap.best_score : null,
-        onClickPath: '#/games/piano_tap'
-      })}
-      ${GameCard({
-        type: 'knob_turn',
-        name: 'Forearm Pronation & Supination',
-        description: 'Rebuild forearm rotational range of motion to restore everyday independence (opening door knobs, taps, and bottle caps).',
-        icon: '🔐',
-        lastScore: perf.knob_turn?.best_score ? 'Best: ' + perf.knob_turn.best_score : null,
-        onClickPath: '#/games/knob_turn'
-      })}
-      ${GameCard({
-        type: 'pegboard_pinch',
-        name: '9-Hole Pegboard Pincer Test',
-        description: 'Gold-standard clinical dexterity training. Practice sub-millimeter thumb & index pincer grasp and release control.',
-        icon: '📌',
-        lastScore: perf.pegboard_pinch?.best_score ? 'Best: ' + perf.pegboard_pinch.best_score : null,
-        onClickPath: '#/games/pegboard_pinch'
-      })}
-      ${GameCard({
-        type: 'shelf_reach',
-        name: 'Shelf Reaching & Stacking',
-        description: 'Overhead shoulder elevation and elbow extension exercises to counteract post-stroke bicep flexion contractures.',
-        icon: '🗄️',
-        lastScore: perf.shelf_reach?.best_score ? 'Best: ' + perf.shelf_reach.best_score : null,
-        onClickPath: '#/games/shelf_reach'
-      })}
-      ${GameCard({
-        type: 'window_wipe',
-        name: 'Planar Window & Surface Sweep',
-        description: 'Continuous active planar sweeping motions to stretch spastic bicep & pectoralis muscle groups across wide bounds.',
-        icon: '🪟',
-        lastScore: perf.window_wipe?.best_score ? 'Best: ' + perf.window_wipe.best_score : null,
-        onClickPath: '#/games/window_wipe'
-      })}
-      ${GameCard({
-        type: 'facial_mirror',
-        name: 'Facial Symmetry Biofeedback',
-        description: 'Neuromuscular biofeedback for hemifacial droop (smile, brow lift, lip pucker, and cheek puff) to aid facial recovery.',
-        icon: '🪞',
-        lastScore: perf.facial_mirror?.best_score ? 'Best: ' + perf.facial_mirror.best_score : null,
-        onClickPath: '#/games/facial_mirror'
-      })}
-    `;
+    perf = perfData.performance || {};
   } catch (err) {
-    console.error(err);
-    container.innerHTML = '<div class="form-error">Failed to load game data.</div>';
+    // Performance data unavailable (e.g. session expired, cold DB) — render games anyway
+    console.warn('Could not load game performance data:', err.message || err);
   }
+
+  container.innerHTML = `
+    ${GameCard({
+      type: 'piano_tap',
+      name: 'Piano Finger Independence',
+      description: 'Isolate individual finger flexor/extensor control (Thumb to Pinky) to overcome abnormal post-stroke flexor synergy.',
+      icon: '🎹',
+      lastScore: perf.piano_tap?.best_score ? 'Best: ' + perf.piano_tap.best_score : null,
+      onClickPath: '#/games/piano_tap'
+    })}
+    ${GameCard({
+      type: 'knob_turn',
+      name: 'Forearm Pronation & Supination',
+      description: 'Rebuild forearm rotational range of motion to restore everyday independence (opening door knobs, taps, and bottle caps).',
+      icon: '🔐',
+      lastScore: perf.knob_turn?.best_score ? 'Best: ' + perf.knob_turn.best_score : null,
+      onClickPath: '#/games/knob_turn'
+    })}
+    ${GameCard({
+      type: 'pegboard_pinch',
+      name: '9-Hole Pegboard Pincer Test',
+      description: 'Gold-standard clinical dexterity training. Practice sub-millimeter thumb & index pincer grasp and release control.',
+      icon: '📌',
+      lastScore: perf.pegboard_pinch?.best_score ? 'Best: ' + perf.pegboard_pinch.best_score : null,
+      onClickPath: '#/games/pegboard_pinch'
+    })}
+    ${GameCard({
+      type: 'shelf_reach',
+      name: 'Shelf Reaching & Stacking',
+      description: 'Overhead shoulder elevation and elbow extension exercises to counteract post-stroke bicep flexion contractures.',
+      icon: '🗄️',
+      lastScore: perf.shelf_reach?.best_score ? 'Best: ' + perf.shelf_reach.best_score : null,
+      onClickPath: '#/games/shelf_reach'
+    })}
+    ${GameCard({
+      type: 'window_wipe',
+      name: 'Planar Window & Surface Sweep',
+      description: 'Continuous active planar sweeping motions to stretch spastic bicep & pectoralis muscle groups across wide bounds.',
+      icon: '🪟',
+      lastScore: perf.window_wipe?.best_score ? 'Best: ' + perf.window_wipe.best_score : null,
+      onClickPath: '#/games/window_wipe'
+    })}
+    ${GameCard({
+      type: 'facial_mirror',
+      name: 'Facial Symmetry Biofeedback',
+      description: 'Neuromuscular biofeedback for hemifacial droop (smile, brow lift, lip pucker, and cheek puff) to aid facial recovery.',
+      icon: '🪞',
+      lastScore: perf.facial_mirror?.best_score ? 'Best: ' + perf.facial_mirror.best_score : null,
+      onClickPath: '#/games/facial_mirror'
+    })}
+  `;
 }
+

@@ -1,28 +1,28 @@
 /* Router Implementation */
 import Auth from './auth.js';
-import renderLanding, { initLanding } from './pages/landing.js?v=8.0';
-import renderLogin, { initLogin } from './pages/login.js?v=8.0';
-import renderRegister, { initRegister } from './pages/register.js?v=8.0';
-import renderPatientDashboard, { initPatientDashboard } from './pages/patientDashboard.js?v=8.0';
-import renderParentDashboard, { initParentDashboard } from './pages/parentDashboard.js?v=8.0';
-import renderDoctorDashboard, { initDoctorDashboard } from './pages/doctorDashboard.js?v=8.0';
-import renderGamesPage, { initGamesPage } from './pages/gamesPage.js?v=8.0';
-import renderGamePage, { initGamePage } from './pages/gamePage.js?v=8.0';
-import renderProgress, { initProgress } from './pages/progress.js?v=8.0';
-import renderHistory, { initHistory } from './pages/history.js?v=8.0';
-import renderStreakPage, { initStreakPage } from './pages/streakPage.js?v=8.0';
-import renderProfile, { initProfile } from './pages/profile.js?v=8.0';
-import renderSettings, { initSettings } from './pages/settings.js?v=8.0';
-import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js?v=8.0';
-import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js?v=8.0';
-import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js?v=8.0';
-import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js?v=8.0';
-import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=8.0';
-import renderExportReport, { initExportReport } from './pages/exportReport.js?v=8.0';
-import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=8.0';
-import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=8.0';
-import renderBenchmarkSuite, { initBenchmarkSuite } from './pages/benchmarkSuite.js?v=8.0';
-import { renderSidebar, initSidebar } from './components/sidebar.js?v=8.0';
+import renderLanding, { initLanding } from './pages/landing.js?v=8.1';
+import renderLogin, { initLogin } from './pages/login.js?v=8.1';
+import renderRegister, { initRegister } from './pages/register.js?v=8.1';
+import renderPatientDashboard, { initPatientDashboard } from './pages/patientDashboard.js?v=8.1';
+import renderParentDashboard, { initParentDashboard } from './pages/parentDashboard.js?v=8.1';
+import renderDoctorDashboard, { initDoctorDashboard } from './pages/doctorDashboard.js?v=8.1';
+import renderGamesPage, { initGamesPage } from './pages/gamesPage.js?v=8.1';
+import renderGamePage, { initGamePage } from './pages/gamePage.js?v=8.1';
+import renderProgress, { initProgress } from './pages/progress.js?v=8.1';
+import renderHistory, { initHistory } from './pages/history.js?v=8.1';
+import renderStreakPage, { initStreakPage } from './pages/streakPage.js?v=8.1';
+import renderProfile, { initProfile } from './pages/profile.js?v=8.1';
+import renderSettings, { initSettings } from './pages/settings.js?v=8.1';
+import renderPatientDetail, { initPatientDetail } from './pages/patientDetail.js?v=8.1';
+import renderAiAdvisor, { initAiAdvisor } from './pages/aiAdvisor.js?v=8.1';
+import renderRomAnalyzer, { initRomAnalyzer } from './pages/romAnalyzer.js?v=8.1';
+import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js?v=8.1';
+import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=8.1';
+import renderExportReport, { initExportReport } from './pages/exportReport.js?v=8.1';
+import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=8.1';
+import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=8.1';
+import renderBenchmarkSuite, { initBenchmarkSuite } from './pages/benchmarkSuite.js?v=8.1';
+import { renderSidebar, initSidebar } from './components/sidebar.js?v=8.1';
 
 export default class Router {
   constructor(rootId) {
@@ -145,8 +145,8 @@ export function setupRouter() {
   router.addRoute('#/dashboard/doctor', renderDoctorDashboard, initDoctorDashboard, { protected: true, role: 'doctor', withSidebar: true });
   
   // Games
-  router.addRoute('#/games', renderGamesPage, initGamesPage, { protected: true, role: 'patient', withSidebar: true });
-  router.addRoute('#/games/:gameType', renderGamePage, initGamePage, { protected: true, role: 'patient', withSidebar: false });
+  router.addRoute('#/games', renderGamesPage, initGamesPage, { protected: false, withSidebar: true });
+  router.addRoute('#/games/:gameType', renderGamePage, initGamePage, { protected: false, withSidebar: false });
   
   // Shared protected
   router.addRoute('#/progress', renderProgress, initProgress, { protected: true, withSidebar: true });

@@ -11,7 +11,7 @@ const navItems = {
     { icon: 'fa-vial', label: 'Clinical Benchmark Lab', route: '#/benchmark' },
     { icon: 'fa-microphone-alt', label: 'Speech Therapy', route: '#/speech-therapy' },
     { icon: 'fa-brain', label: 'AI Recovery Coach', route: '#/ai-advisor' },
-    { icon: 'fa-file-medical-alt', label: 'Prescriptions', route: '#/prescriptions' },
+
     { icon: 'fa-chart-bar', label: 'Progress', route: '#/progress' },
     { icon: 'fa-fire', label: 'Streak', route: '#/streak' },
     { icon: 'fa-clipboard-list', label: 'History', route: '#/history' },
@@ -22,6 +22,7 @@ const navItems = {
   ],
   parent: [
     { icon: 'fa-chart-line', label: 'Dashboard', route: '#/dashboard' },
+    { icon: 'fa-gamepad', label: 'Rehab Games', route: '#/games' },
     { icon: 'fa-user', label: 'My Patient', route: '#/my-patient' },
     { icon: 'fa-vial', label: 'Clinical Benchmark Lab', route: '#/benchmark' },
     { icon: 'fa-heart', label: 'Cheering Wall', route: '#/cheering' },
@@ -35,9 +36,10 @@ const navItems = {
   ],
   doctor: [
     { icon: 'fa-chart-line', label: 'Dashboard', route: '#/dashboard' },
+    { icon: 'fa-gamepad', label: 'Rehab Games', route: '#/games' },
     { icon: 'fa-users', label: 'Patients', route: '#/patients' },
     { icon: 'fa-vial', label: 'Clinical Benchmark Lab', route: '#/benchmark' },
-    { icon: 'fa-file-medical-alt', label: 'Prescribe Regimens', route: '#/prescriptions' },
+
     { icon: 'fa-ruler-combined', label: 'ROM Biomechanics', route: '#/rom-analyzer' },
     { icon: 'fa-brain', label: 'AI Clinical Advisor', route: '#/ai-advisor' },
     { icon: 'fa-file-pdf', label: 'Export Reports', route: '#/export-report' },
@@ -49,8 +51,7 @@ const navItems = {
 };
 
 export function renderSidebar() {
-  const user = Auth.getUser();
-  if (!user) return '';
+  const user = Auth.getUser() || { name: 'Patient User', role: 'patient' };
   const role = user.role || 'patient';
   const items = navItems[role] || navItems.patient;
   const current = window.location.hash || '#/dashboard';

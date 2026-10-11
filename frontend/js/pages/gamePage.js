@@ -94,8 +94,8 @@ export async function initGamePage(params) {
     const defaultHt = localStorage.getItem('handTracking') !== 'false';
     toggle.checked = defaultHt;
     
-    // Dynamic import
-    const module = await import(`../games/${modFile}`);
+    // Dynamic import with cache busting
+    const module = await import(`../games/${modFile}?v=8.1`);
     const GameClass = module.default;
     
     const initGame = async () => {
