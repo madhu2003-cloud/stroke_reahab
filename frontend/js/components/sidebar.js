@@ -14,7 +14,6 @@ const navItems = {
 
     { icon: 'fa-chart-bar', label: 'Progress', route: '#/progress' },
     { icon: 'fa-fire', label: 'Streak', route: '#/streak' },
-    { icon: 'fa-clipboard-list', label: 'History', route: '#/history' },
     { icon: 'fa-file-pdf', label: 'Clinical Report', route: '#/export-report' },
     { icon: 'fa-star', label: 'Give Feedback', route: '#/feedback' },
     { icon: 'fa-user', label: 'Profile', route: '#/profile' },
@@ -29,7 +28,6 @@ const navItems = {
     { icon: 'fa-brain', label: 'AI Recovery Coach', route: '#/ai-advisor' },
     { icon: 'fa-chart-bar', label: 'Progress', route: '#/progress' },
     { icon: 'fa-file-pdf', label: 'Clinical Report', route: '#/export-report' },
-    { icon: 'fa-clipboard-list', label: 'Activity Logs', route: '#/history' },
     { icon: 'fa-star', label: 'Give Feedback', route: '#/feedback' },
     { icon: 'fa-user-circle', label: 'Profile', route: '#/profile' },
     { icon: 'fa-cog', label: 'Settings', route: '#/settings' },

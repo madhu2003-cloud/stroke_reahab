@@ -68,7 +68,7 @@ export default function renderPatientDashboard() {
         <div class="glass-card full-width">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
             <h3>Recent Activity</h3>
-            <a href="#/history" class="btn btn-ghost btn-sm">View All</a>
+            <a href="#/progress" class="btn btn-ghost btn-sm">View Analytics</a>
           </div>
           <div id="recent-activity-container"></div>
         </div>

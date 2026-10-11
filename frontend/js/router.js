@@ -150,7 +150,7 @@ export function setupRouter() {
   
   // Shared protected
   router.addRoute('#/progress', renderProgress, initProgress, { protected: true, withSidebar: true });
-  router.addRoute('#/history', renderHistory, initHistory, { protected: true, withSidebar: true });
+  router.addRoute('#/history', renderProgress, initProgress, { protected: true, withSidebar: true });
   router.addRoute('#/profile', renderProfile, initProfile, { protected: true, withSidebar: true });
   router.addRoute('#/settings', renderSettings, initSettings, { protected: true, withSidebar: true });
   
