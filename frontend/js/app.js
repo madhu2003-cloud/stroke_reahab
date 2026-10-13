@@ -1,5 +1,5 @@
 /* Main App Entry Point */
-import { setupRouter } from './router.js?v=8.0';
+import { setupRouter } from './router.js?v=8.3';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Check theme

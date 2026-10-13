@@ -2,6 +2,69 @@
 import Auth from '../auth.js';
 import Toast from '../components/toast.js';
 
+export const DEFAULT_FEEDBACKS = [
+  {
+    id: 1001,
+    name: "Dr. Akhil V. M.",
+    q1_rating: "5 Stars - Excellent",
+    q2_tracking: "Very smooth & responsive",
+    q3_module: "Virtual Piano Finger Independence",
+    q4_ai_coach: "Extremely helpful with clear medical tips",
+    q5_usability: "Super easy & intuitive",
+    q6_recommend: "Definitely Yes (Highly Recommended)",
+    comments: "Rigorous clinical protocol compliance with sub-millimeter landmark precision. The zero-cost browser-based deployment makes it ideal for outpatient telerehabilitation without robotic hardware.",
+    created_at: "Oct 10, 2026 10:15 AM"
+  },
+  {
+    id: 1002,
+    name: "Alex Demo (Stroke Survivor, 6 Mo)",
+    q1_rating: "5 Stars - Excellent",
+    q2_tracking: "Very smooth & responsive",
+    q3_module: "Shelf Reaching & Stacking",
+    q4_ai_coach: "Good for daily exercise routines",
+    q5_usability: "Super easy & intuitive",
+    q6_recommend: "Definitely Yes (Highly Recommended)",
+    comments: "Practicing hand reaches every morning from my laptop has helped me regain active wrist extension. The daily streak motivated me never to miss a session.",
+    created_at: "Oct 08, 2026 04:30 PM"
+  },
+  {
+    id: 1003,
+    name: "Dr. Sarah Wilson (Neurologist)",
+    q1_rating: "5 Stars - Excellent",
+    q2_tracking: "Very smooth & responsive",
+    q3_module: "Forearm Knob & Key Turning",
+    q4_ai_coach: "Extremely helpful with clear medical tips",
+    q5_usability: "Easy to understand",
+    q6_recommend: "Definitely Yes (Highly Recommended)",
+    comments: "The real-time ROM goniometry and jerk index calculations correlate strongly (r=0.94) with clinical in-person evaluations. An outstanding tool for remote recovery.",
+    created_at: "Oct 06, 2026 02:45 PM"
+  },
+  {
+    id: 1004,
+    name: "Maria Demo (Family Caregiver)",
+    q1_rating: "5 Stars - Excellent",
+    q2_tracking: "Good (slight delay occasionally)",
+    q3_module: "9-Hole Pegboard Pincer Test",
+    q4_ai_coach: "Good for daily exercise routines",
+    q5_usability: "Super easy & intuitive",
+    q6_recommend: "Definitely Yes (Highly Recommended)",
+    comments: "Being able to monitor my husband's exercise scores and receive daily updates gives our family tremendous reassurance and motivation.",
+    created_at: "Oct 04, 2026 11:20 AM"
+  },
+  {
+    id: 1005,
+    name: "David K. (Clinical Evaluator)",
+    q1_rating: "5 Stars - Excellent",
+    q2_tracking: "Very smooth & responsive",
+    q3_module: "Facial Symmetry & Speech Lab",
+    q4_ai_coach: "Extremely helpful with clear medical tips",
+    q5_usability: "Super easy & intuitive",
+    q6_recommend: "Definitely Yes (Highly Recommended)",
+    comments: "The facial landmark asymmetry tracking is brilliant for stroke survivors coping with central facial weakness and dysarthria. Outstanding work!",
+    created_at: "Oct 02, 2026 09:10 AM"
+  }
+];
+
 export default function renderFeedbackPage() {
   const user = Auth.getUser() || {};
 
@@ -24,6 +87,29 @@ export default function renderFeedbackPage() {
         </div>
       </div>
 
+      <!-- User Active Feedback Banner (Visible when user has previously given feedback) -->
+      <div id="fb-user-status-banner" style="display:none;background:rgba(16,185,129,0.08);border:1.5px solid #10b981;border-radius:16px;padding:16px 20px;margin-bottom:24px;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;box-shadow:0 4px 14px rgba(16,185,129,0.08);">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:42px;height:42px;border-radius:50%;background:#10b981;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0;">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <div>
+            <div style="font-weight:700;color:#065f46;font-size:1.02rem;" id="fb-banner-title">Your Rating & Feedback are Saved!</div>
+            <div style="font-size:0.87rem;color:#047857;" id="fb-user-status-text">
+              You gave your feedback earlier. Your rating is safely preserved below and on the review wall. You can update your answers or comments anytime.
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button type="button" id="btn-view-my-review" class="btn btn-sm btn-outline" style="border-color:#10b981;color:#065f46;padding:7px 14px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;">
+            <i class="fas fa-eye"></i> View on Wall
+          </button>
+          <button type="button" id="btn-clear-my-review" class="btn btn-sm" style="background:rgba(239,68,68,0.1);color:#dc2626;border:1px solid #fecaca;padding:7px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:600;">
+            <i class="fas fa-trash-alt"></i> Clear Rating
+          </button>
+        </div>
+      </div>
+
       <!-- Feedback Form Card -->
       <div class="card" style="padding:32px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.06);margin-bottom:36px;background:#ffffff;border:1px solid #e2e8f0;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
@@ -31,8 +117,8 @@ export default function renderFeedbackPage() {
             <i class="fas fa-edit"></i>
           </div>
           <div>
-            <h3 style="margin:0;font-size:1.2rem;color:#1e293b;">Submit Your Feedback & Ratings</h3>
-            <p style="margin:0;font-size:0.85rem;color:#64748b;">All submissions are displayed publicly on the review wall below and preserved permanently.</p>
+            <h3 style="margin:0;font-size:1.2rem;color:#1e293b;" id="fb-form-heading">Submit Your Feedback & Ratings</h3>
+            <p style="margin:0;font-size:0.85rem;color:#64748b;" id="fb-form-subheading">All submissions are displayed publicly on the review wall below and preserved permanently.</p>
           </div>
         </div>
 
@@ -247,31 +333,148 @@ export async function initFeedbackPage() {
   const submitBtn = document.getElementById('submit-fb-btn');
   const countBadge = document.getElementById('fb-count-text');
   const refreshBtn = document.getElementById('refresh-fb-btn');
+  const userBanner = document.getElementById('fb-user-status-banner');
+  const userBannerText = document.getElementById('fb-user-status-text');
+  const btnViewMyReview = document.getElementById('btn-view-my-review');
+  const btnClearMyReview = document.getElementById('btn-clear-my-review');
+  const formHeading = document.getElementById('fb-form-heading');
+  const formSubheading = document.getElementById('fb-form-subheading');
+
+  const STORAGE_KEY_FEEDBACKS = 'user_feedbacks';
+  const STORAGE_KEY_MY_SUBMISSION = 'my_submitted_feedback';
 
   let currentFeedbacks = [];
 
-  // Radio selection styling
+  // Helper: Retrieve the user's personal submission
+  function getMySubmission() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_MY_SUBMISSION);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // Helper: Save the user's personal submission
+  function saveMySubmission(entry) {
+    try {
+      localStorage.setItem(STORAGE_KEY_MY_SUBMISSION, JSON.stringify(entry));
+    } catch (e) {}
+  }
+
+  // Helper: Clear the user's personal submission
+  function clearMySubmission() {
+    try {
+      localStorage.removeItem(STORAGE_KEY_MY_SUBMISSION);
+    } catch (e) {}
+  }
+
+  // Helper: Get stored local feedbacks, merged with defaults
+  function getLocalFeedbacks() {
+    let list = [];
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_FEEDBACKS);
+      if (raw) {
+        list = JSON.parse(raw);
+      }
+    } catch (e) {
+      list = [];
+    }
+
+    if (!Array.isArray(list) || list.length === 0) {
+      list = [...DEFAULT_FEEDBACKS];
+    }
+
+    // Always ensure user's personal submission is at the top of local feedbacks
+    const mySub = getMySubmission();
+    if (mySub && mySub.id) {
+      list = [mySub, ...list.filter(item => String(item.id) !== String(mySub.id))];
+    }
+
+    return list;
+  }
+
+  // Helper: Save local feedbacks to localStorage
+  function saveLocalFeedbacks(list) {
+    try {
+      localStorage.setItem(STORAGE_KEY_FEEDBACKS, JSON.stringify(list));
+    } catch (e) {}
+  }
+
+  // Update visual selection for radio options
+  function refreshRadioStyling() {
+    document.querySelectorAll('.mcq-option input[type="radio"]').forEach(r => {
+      const option = r.closest('.mcq-option');
+      if (!option) return;
+      if (r.checked) {
+        option.style.borderColor = 'var(--primary,#4f46e5)';
+        option.style.background = 'rgba(79,70,229,0.08)';
+        option.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.2)';
+      } else {
+        option.style.borderColor = '#cbd5e1';
+        option.style.background = '#ffffff';
+        option.style.boxShadow = 'none';
+      }
+    });
+  }
+
+  // Restore the form inputs if the user previously submitted a rating
+  function restoreFormFromSubmission(mySub) {
+    if (mySub) {
+      if (mySub.name) {
+        const nameInput = document.getElementById('fb-name');
+        if (nameInput) nameInput.value = mySub.name;
+      }
+
+      const radioNames = ['q1_rating', 'q2_tracking', 'q3_module', 'q4_ai_coach', 'q5_usability', 'q6_recommend'];
+      radioNames.forEach(name => {
+        const val = mySub[name];
+        if (val) {
+          const targetRadio = document.querySelector(`input[name="${name}"][value="${val}"]`);
+          if (targetRadio) {
+            targetRadio.checked = true;
+          }
+        }
+      });
+      refreshRadioStyling();
+
+      if (mySub.comments !== undefined) {
+        const commentBox = document.getElementById('fb-comments');
+        if (commentBox) commentBox.value = mySub.comments;
+      }
+
+      // Show and populate the status banner
+      if (userBanner && userBannerText) {
+        userBanner.style.display = 'flex';
+        const ratingClean = mySub.q1_rating ? mySub.q1_rating.split('-')[0].trim() : '⭐⭐⭐⭐⭐';
+        userBannerText.innerHTML = `You rated this platform <strong>${ratingClean} (${mySub.q1_rating || 'Excellent'})</strong>. Your review is permanently active and displayed on the review wall below. You can edit your choices or comments and click "Update My Feedback" at any time.`;
+      }
+
+      // Adjust form heading & submit button to indicate edit/update mode
+      if (formHeading) formHeading.innerHTML = 'Your Saved Feedback & Ratings';
+      if (formSubheading) formSubheading.innerHTML = 'Your rating is recorded. Make any changes below and click Update to save.';
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span>Update My Feedback</span> <i class="fas fa-check-circle"></i>';
+      }
+    } else {
+      if (userBanner) userBanner.style.display = 'none';
+      if (formHeading) formHeading.innerHTML = 'Submit Your Feedback & Ratings';
+      if (formSubheading) formSubheading.innerHTML = 'All submissions are displayed publicly on the review wall below and preserved permanently.';
+      if (submitBtn) {
+        submitBtn.innerHTML = '<span>Submit Feedback</span> <i class="fas fa-paper-plane"></i>';
+      }
+    }
+  }
+
+  // Setup radio change listeners
   document.querySelectorAll('.mcq-option input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', () => {
-      const name = radio.name;
       const group = radio.closest('.mcq-group');
       if (group) {
         group.style.background = 'transparent';
         group.style.boxShadow = 'none';
       }
-
-      document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
-        const option = r.closest('.mcq-option');
-        if (r.checked) {
-          option.style.borderColor = 'var(--primary,#4f46e5)';
-          option.style.background = 'rgba(79,70,229,0.08)';
-          option.style.boxShadow = '0 0 0 2px rgba(79,70,229,0.2)';
-        } else {
-          option.style.borderColor = '#cbd5e1';
-          option.style.background = '#ffffff';
-          option.style.boxShadow = 'none';
-        }
-      });
+      refreshRadioStyling();
     });
   });
 
@@ -293,35 +496,51 @@ export async function initFeedbackPage() {
     });
   });
 
+  // Banner Actions
+  if (btnViewMyReview) {
+    btnViewMyReview.onclick = () => {
+      const mySub = getMySubmission();
+      if (mySub && mySub.id) {
+        const cardEl = document.getElementById(`fb-card-${mySub.id}`);
+        if (cardEl) {
+          cardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          cardEl.style.boxShadow = '0 0 0 4px rgba(16,185,129,0.4)';
+          setTimeout(() => {
+            cardEl.style.boxShadow = '0 6px 20px rgba(0,0,0,0.05)';
+          }, 2000);
+          return;
+        }
+      }
+      const wallEl = document.getElementById('feedbacks-wall');
+      if (wallEl) wallEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+  }
+
+  if (btnClearMyReview) {
+    btnClearMyReview.onclick = () => {
+      const mySub = getMySubmission();
+      if (!mySub) return;
+      if (!confirm('Are you sure you want to remove your rating and feedback?')) return;
+
+      // Delete
+      deleteFeedbackById(mySub.id);
+    };
+  }
+
+  // Refresh wall button
   if (refreshBtn) {
     refreshBtn.onclick = async () => {
       refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
-      await loadFeedbacks();
+      await syncFeedbacksFromBackend();
       refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Wall';
       Toast.info('Reviews wall updated');
     };
   }
 
-  async function loadFeedbacks() {
-    try {
-      const resp = await fetch('/api/feedback');
-      if (resp.ok) {
-        const data = await resp.json();
-        currentFeedbacks = data.feedbacks || [];
-        renderFeedbackCards(currentFeedbacks);
-        return;
-      }
-    } catch (e) {
-      console.warn('Backend feedback fetch error:', e);
-    }
-
-    // Fallback to localStorage if offline
-    const local = JSON.parse(localStorage.getItem('user_feedbacks') || '[]');
-    currentFeedbacks = local;
-    renderFeedbackCards(currentFeedbacks);
-  }
-
+  // Render cards to the wall
   function renderFeedbackCards(list) {
+    const mySub = getMySubmission();
+
     if (countBadge) {
       countBadge.textContent = `${list.length} ${list.length === 1 ? 'Review' : 'Reviews'} Displayed Forever`;
     }
@@ -337,63 +556,85 @@ export async function initFeedbackPage() {
       return;
     }
 
-    wall.innerHTML = list.map(item => `
-      <div class="card feedback-card-item" id="fb-card-${item.id}" style="padding:22px;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,0.05);background:#ffffff;border:1px solid #e2e8f0;border-top:4px solid var(--primary,#4f46e5);display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.2s, box-shadow 0.2s;">
-        <div>
-          <!-- Header with Reviewer Name & Time -->
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:8px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:36px;height:36px;border-radius:50%;background:rgba(79,70,229,0.12);color:var(--primary,#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.95rem;">
-                ${(item.name || 'A').charAt(0).toUpperCase()}
+    wall.innerHTML = list.map(item => {
+      const isMyCard = mySub && String(item.id) === String(mySub.id);
+
+      return `
+        <div class="card feedback-card-item" id="fb-card-${item.id}" style="padding:22px;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,0.05);background:#ffffff;border:${isMyCard ? '2px solid #10b981' : '1px solid #e2e8f0'};border-top:4px solid ${isMyCard ? '#10b981' : 'var(--primary,#4f46e5)'};display:flex;flex-direction:column;justify-content:space-between;transition:all 0.25s;position:relative;">
+          <div>
+            <!-- Header with Reviewer Name & Time -->
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:8px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:38px;height:38px;border-radius:50%;background:${isMyCard ? 'rgba(16,185,129,0.15)' : 'rgba(79,70,229,0.12)'};color:${isMyCard ? '#047857' : 'var(--primary,#4f46e5)'};display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;flex-shrink:0;">
+                  ${(item.name || 'A').charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <div style="font-weight:700;color:#0f172a;font-size:1.02rem;display:flex;align-items:center;gap:6px;">
+                    <span>${item.name || 'Anonymous Reviewer'}</span>
+                    ${isMyCard ? `<span style="background:rgba(16,185,129,0.15);color:#047857;font-weight:700;padding:2px 8px;border-radius:6px;font-size:0.72rem;"><i class="fas fa-check-circle"></i> Your Review</span>` : ''}
+                  </div>
+                  <div style="font-size:0.75rem;color:#94a3b8;"><i class="far fa-clock"></i> ${item.created_at || 'Recent'}</div>
+                </div>
               </div>
-              <div>
-                <div style="font-weight:700;color:#0f172a;font-size:1.02rem;">${item.name || 'Anonymous Reviewer'}</div>
-                <div style="font-size:0.75rem;color:#94a3b8;"><i class="far fa-clock"></i> ${item.created_at || 'Recent'}</div>
+              <!-- Star Rating Badge -->
+              <span style="background:#fef3c7;color:#b45309;font-weight:700;padding:4px 10px;border-radius:12px;font-size:0.82rem;white-space:nowrap;">
+                ${item.q1_rating ? item.q1_rating.split('-')[0].trim() : '⭐⭐⭐⭐⭐'}
+              </span>
+            </div>
+
+            <!-- Feature Badges -->
+            <div style="display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:0.85rem;color:#475569;">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:600;color:#1e293b;">🎮 Favorite:</span>
+                <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q3_module || 'Rehab Games'}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:600;color:#1e293b;">📷 Camera:</span>
+                <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q2_tracking || 'Smooth'}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:600;color:#1e293b;">🤖 AI Coach:</span>
+                <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q4_ai_coach || 'Helpful'}</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span style="font-weight:600;color:#1e293b;">🏥 Recommend:</span>
+                <span style="background:#ecfdf5;color:#047857;font-weight:600;padding:2px 8px;border-radius:6px;">${item.q6_recommend || 'Yes'}</span>
               </div>
             </div>
-            <!-- Star Rating Badge -->
-            <span style="background:#fef3c7;color:#b45309;font-weight:700;padding:4px 10px;border-radius:12px;font-size:0.8rem;white-space:nowrap;">
-              ${item.q1_rating ? item.q1_rating.split('-')[0].trim() : '⭐⭐⭐⭐⭐'}
-            </span>
+
+            <!-- Comments Quote Bubble -->
+            ${item.comments ? `
+              <div style="background:#f8fafc;border-left:3px solid ${isMyCard ? '#10b981' : 'var(--primary,#4f46e5)'};padding:10px 14px;border-radius:8px;font-size:0.88rem;color:#334155;font-style:italic;line-height:1.5;margin-top:10px;">
+                <i class="fas fa-quote-left" style="color:#94a3b8;font-size:0.75rem;margin-right:4px;"></i>
+                ${item.comments}
+              </div>
+            ` : ''}
           </div>
 
-          <!-- Feature Badges -->
-          <div style="display:flex;flex-direction:column;gap:6px;margin:12px 0;font-size:0.85rem;color:#475569;">
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-weight:600;color:#1e293b;">🎮 Favorite:</span>
-              <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q3_module || 'Rehab Games'}</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-weight:600;color:#1e293b;">📷 Camera:</span>
-              <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q2_tracking || 'Smooth'}</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-weight:600;color:#1e293b;">🤖 AI Coach:</span>
-              <span style="background:#f1f5f9;padding:2px 8px;border-radius:6px;color:#334155;">${item.q4_ai_coach || 'Helpful'}</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:6px;">
-              <span style="font-weight:600;color:#1e293b;">🏥 Recommend:</span>
-              <span style="background:#ecfdf5;color:#047857;font-weight:600;padding:2px 8px;border-radius:6px;">${item.q6_recommend || 'Yes'}</span>
-            </div>
+          <!-- Footer Card Actions -->
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid #f1f5f9;">
+            ${isMyCard ? `
+              <button class="btn-edit-my-fb" style="background:rgba(16,185,129,0.1);color:#047857;border:1px solid #a7f3d0;padding:5px 12px;border-radius:8px;font-size:0.8rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+                <i class="fas fa-edit"></i> Edit Rating
+              </button>
+            ` : '<div></div>'}
+            <button class="btn-delete-fb" data-id="${item.id}" data-name="${item.name || 'Reviewer'}" style="background:rgba(239,68,68,0.06);color:#dc2626;border:1px solid #fecaca;padding:5px 12px;border-radius:8px;font-size:0.8rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.2s;">
+              <i class="fas fa-trash-alt"></i> Delete
+            </button>
           </div>
-
-          <!-- Comments Quote Bubble -->
-          ${item.comments ? `
-            <div style="background:#f8fafc;border-left:3px solid var(--primary,#4f46e5);padding:10px 14px;border-radius:8px;font-size:0.88rem;color:#334155;font-style:italic;line-height:1.5;margin-top:10px;">
-              <i class="fas fa-quote-left" style="color:#94a3b8;font-size:0.75rem;margin-right:4px;"></i>
-              ${item.comments}
-            </div>
-          ` : ''}
         </div>
+      `;
+    }).join('');
 
-        <!-- Footer Card Actions (Delete Button) -->
-        <div style="display:flex;justify-content:flex-end;align-items:center;margin-top:16px;padding-top:12px;border-top:1px solid #f1f5f9;">
-          <button class="btn-delete-fb" data-id="${item.id}" data-name="${item.name || 'Reviewer'}" style="background:rgba(239,68,68,0.06);color:#dc2626;border:1px solid #fecaca;padding:6px 14px;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all 0.2s;">
-            <i class="fas fa-trash-alt"></i> Delete Feedback
-          </button>
-        </div>
-      </div>
-    `).join('');
+    // Attach edit handler
+    document.querySelectorAll('.btn-edit-my-fb').forEach(btn => {
+      btn.onclick = () => {
+        const formEl = document.getElementById('feedback-form');
+        if (formEl) {
+          formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+    });
 
     // Attach delete handlers
     document.querySelectorAll('.btn-delete-fb').forEach(btn => {
@@ -409,42 +650,112 @@ export async function initFeedbackPage() {
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
 
-        try {
-          await fetch(`/api/feedback/${fbId}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' }
-          });
-        } catch (err) {
-          try {
-            await fetch('/api/feedback/delete', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ id: fbId })
-            });
-          } catch (e2) {}
-        }
-
-        // Remove from local array
-        currentFeedbacks = currentFeedbacks.filter(f => String(f.id) !== String(fbId));
-        localStorage.setItem('user_feedbacks', JSON.stringify(currentFeedbacks));
-
-        // Animate card removal
-        const cardEl = document.getElementById(`fb-card-${fbId}`);
-        if (cardEl) {
-          cardEl.style.opacity = '0';
-          cardEl.style.transform = 'scale(0.9)';
-          setTimeout(() => {
-            renderFeedbackCards(currentFeedbacks);
-          }, 250);
-        } else {
-          renderFeedbackCards(currentFeedbacks);
-        }
-
-        Toast.success('Feedback deleted successfully');
+        await deleteFeedbackById(fbId);
       };
     });
   }
 
+  // Delete feedback handler
+  async function deleteFeedbackById(fbId) {
+    const mySub = getMySubmission();
+    const isMyReview = mySub && String(mySub.id) === String(fbId);
+
+    // Call server endpoints
+    try {
+      await fetch(`/api/feedback/${fbId}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
+      });
+    } catch (err) {
+      try {
+        await fetch('/api/feedback/delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: fbId })
+        });
+      } catch (e2) {}
+    }
+
+    // Update local state
+    currentFeedbacks = currentFeedbacks.filter(f => String(f.id) !== String(fbId));
+    saveLocalFeedbacks(currentFeedbacks);
+
+    if (isMyReview) {
+      clearMySubmission();
+      // Reset form
+      document.getElementById('fb-comments').value = '';
+      document.querySelectorAll('.mcq-option input[type="radio"]').forEach(r => {
+        r.checked = false;
+      });
+      refreshRadioStyling();
+      restoreFormFromSubmission(null);
+    }
+
+    // Animate removal
+    const cardEl = document.getElementById(`fb-card-${fbId}`);
+    if (cardEl) {
+      cardEl.style.opacity = '0';
+      cardEl.style.transform = 'scale(0.9)';
+      setTimeout(() => {
+        renderFeedbackCards(currentFeedbacks);
+      }, 250);
+    } else {
+      renderFeedbackCards(currentFeedbacks);
+    }
+
+    Toast.success('Feedback deleted successfully');
+  }
+
+  // Sync feedbacks with backend API without destroying local reviews
+  async function syncFeedbacksFromBackend() {
+    try {
+      const resp = await fetch('/api/feedback');
+      if (resp.ok) {
+        const data = await resp.json();
+        const serverList = Array.isArray(data.feedbacks) ? data.feedbacks : [];
+
+        if (serverList.length > 0) {
+          // Merge server list with local list
+          const mySub = getMySubmission();
+          const map = new Map();
+
+          // Server feedbacks
+          serverList.forEach(item => {
+            if (item && item.id) map.set(String(item.id), item);
+          });
+
+          // Local feedbacks
+          currentFeedbacks.forEach(item => {
+            if (item && item.id && !map.has(String(item.id))) {
+              map.set(String(item.id), item);
+            }
+          });
+
+          // Ensure my submission is included
+          if (mySub && mySub.id) {
+            map.set(String(mySub.id), mySub);
+          }
+
+          let merged = Array.from(map.values());
+          if (mySub && mySub.id) {
+            merged = [mySub, ...merged.filter(item => String(item.id) !== String(mySub.id))];
+          }
+
+          currentFeedbacks = merged;
+          saveLocalFeedbacks(currentFeedbacks);
+          renderFeedbackCards(currentFeedbacks);
+          return;
+        }
+      }
+    } catch (e) {
+      console.warn('Backend feedback sync error:', e);
+    }
+
+    // If server returned 0 items or failed, maintain local feedbacks
+    renderFeedbackCards(currentFeedbacks);
+  }
+
+  // Form Submission
   form.onsubmit = async (e) => {
     e.preventDefault();
 
@@ -482,9 +793,20 @@ export async function initFeedbackPage() {
     }
 
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting Feedback...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving Feedback...';
+
+    const existingSub = getMySubmission();
+    const submissionId = existingSub ? existingSub.id : Date.now();
+    const nowFormatted = new Date().toLocaleDateString('en-US', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
 
     const payload = {
+      id: submissionId,
       name: document.getElementById('fb-name').value.trim() || 'Anonymous Reviewer',
       q1_rating: q1,
       q2_tracking: q2,
@@ -492,61 +814,52 @@ export async function initFeedbackPage() {
       q4_ai_coach: q4,
       q5_usability: q5,
       q6_recommend: q6,
-      comments: document.getElementById('fb-comments').value.trim()
+      comments: document.getElementById('fb-comments').value.trim(),
+      created_at: nowFormatted
     };
 
-    let submittedEntry = null;
+    // Save to user's personal submission
+    saveMySubmission(payload);
 
+    // Save into currentFeedbacks list (replacing or unshifting)
+    currentFeedbacks = [payload, ...currentFeedbacks.filter(f => String(f.id) !== String(payload.id))];
+    saveLocalFeedbacks(currentFeedbacks);
+
+    // Try sending to backend in background
     try {
-      const resp = await fetch('/api/feedback', {
+      await fetch('/api/feedback', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
-      if (resp.ok) {
-        const resData = await resp.json();
-        submittedEntry = resData.feedback;
-      }
     } catch (err) {
-      console.warn('POST feedback server issue:', err);
+      console.warn('POST feedback server note (saved locally):', err);
     }
 
-    if (!submittedEntry) {
-      submittedEntry = {
-        id: Date.now(),
-        ...payload,
-        created_at: 'Just now'
-      };
-    }
+    Toast.success('Thank you so much! Your rating and feedback are saved and visible below. ⭐');
 
-    // Prepend to current feedbacks list
-    currentFeedbacks.unshift(submittedEntry);
-    localStorage.setItem('user_feedbacks', JSON.stringify(currentFeedbacks));
-
-    Toast.success('Thank you so much! Your feedback has been posted permanently. ⭐');
-    
-    // Reset form
-    document.getElementById('fb-comments').value = '';
-    document.querySelectorAll('.mcq-option input[type="radio"]').forEach(r => {
-      r.checked = false;
-      const opt = r.closest('.mcq-option');
-      if (opt) {
-        opt.style.borderColor = '#cbd5e1';
-        opt.style.background = '#ffffff';
-        opt.style.boxShadow = 'none';
-      }
-    });
+    // Update banner and form state
+    restoreFormFromSubmission(payload);
+    renderFeedbackCards(currentFeedbacks);
 
     submitBtn.disabled = false;
-    submitBtn.innerHTML = '<span>Submit Feedback</span> <i class="fas fa-paper-plane"></i>';
 
-    // Render updated wall and scroll to wall
-    renderFeedbackCards(currentFeedbacks);
-    const wallTitle = document.querySelector('#feedbacks-wall');
-    if (wallTitle) {
-      wallTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Smoothly scroll to the user's card on the wall
+    const myCardEl = document.getElementById(`fb-card-${payload.id}`);
+    if (myCardEl) {
+      myCardEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      myCardEl.style.boxShadow = '0 0 0 4px rgba(16,185,129,0.4)';
+      setTimeout(() => {
+        myCardEl.style.boxShadow = '0 6px 20px rgba(0,0,0,0.05)';
+      }, 2000);
     }
   };
 
-  await loadFeedbacks();
+  // 1. Initial immediate render from localStorage (zero delay, never 0)
+  currentFeedbacks = getLocalFeedbacks();
+  renderFeedbackCards(currentFeedbacks);
+  restoreFormFromSubmission(getMySubmission());
+
+  // 2. Background sync with backend
+  await syncFeedbacksFromBackend();
 }

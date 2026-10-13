@@ -20,7 +20,7 @@ import renderSpeechTherapy, { initSpeechTherapy } from './pages/speechTherapy.js
 import renderPrescriptionsPage, { initPrescriptionsPage } from './pages/prescriptionsPage.js?v=8.1';
 import renderExportReport, { initExportReport } from './pages/exportReport.js?v=8.1';
 import renderCheeringPage, { initCheeringPage } from './pages/cheeringPage.js?v=8.1';
-import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=8.1';
+import renderFeedbackPage, { initFeedbackPage } from './pages/feedbackPage.js?v=8.3';
 import renderBenchmarkSuite, { initBenchmarkSuite } from './pages/benchmarkSuite.js?v=8.1';
 import { renderSidebar, initSidebar } from './components/sidebar.js?v=8.1';
 

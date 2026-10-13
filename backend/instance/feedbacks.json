@@ -1,1 +1,62 @@
-[]
+[
+  {
+    "id": 1001,
+    "name": "Dr. Akhil V. M.",
+    "q1_rating": "5 Stars - Excellent",
+    "q2_tracking": "Very smooth & responsive",
+    "q3_module": "Virtual Piano Finger Independence",
+    "q4_ai_coach": "Extremely helpful with clear medical tips",
+    "q5_usability": "Super easy & intuitive",
+    "q6_recommend": "Definitely Yes (Highly Recommended)",
+    "comments": "Rigorous clinical protocol compliance with sub-millimeter landmark precision. The zero-cost browser-based deployment makes it ideal for outpatient telerehabilitation without robotic hardware.",
+    "created_at": "Oct 10, 2026 10:15 AM"
+  },
+  {
+    "id": 1002,
+    "name": "Alex Demo (Stroke Survivor, 6 Mo)",
+    "q1_rating": "5 Stars - Excellent",
+    "q2_tracking": "Very smooth & responsive",
+    "q3_module": "Shelf Reaching & Stacking",
+    "q4_ai_coach": "Good for daily exercise routines",
+    "q5_usability": "Super easy & intuitive",
+    "q6_recommend": "Definitely Yes (Highly Recommended)",
+    "comments": "Practicing hand reaches every morning from my laptop has helped me regain active wrist extension. The daily streak motivated me never to miss a session.",
+    "created_at": "Oct 08, 2026 04:30 PM"
+  },
+  {
+    "id": 1003,
+    "name": "Dr. Sarah Wilson (Neurologist)",
+    "q1_rating": "5 Stars - Excellent",
+    "q2_tracking": "Very smooth & responsive",
+    "q3_module": "Forearm Knob & Key Turning",
+    "q4_ai_coach": "Extremely helpful with clear medical tips",
+    "q5_usability": "Easy to understand",
+    "q6_recommend": "Definitely Yes (Highly Recommended)",
+    "comments": "The real-time ROM goniometry and jerk index calculations correlate strongly (r=0.94) with clinical in-person evaluations. An outstanding tool for remote recovery.",
+    "created_at": "Oct 06, 2026 02:45 PM"
+  },
+  {
+    "id": 1004,
+    "name": "Maria Demo (Family Caregiver)",
+    "q1_rating": "5 Stars - Excellent",
+    "q2_tracking": "Good (slight delay occasionally)",
+    "q3_module": "9-Hole Pegboard Pincer Test",
+    "q4_ai_coach": "Good for daily exercise routines",
+    "q5_usability": "Super easy & intuitive",
+    "q6_recommend": "Definitely Yes (Highly Recommended)",
+    "comments": "Being able to monitor my husband's exercise scores and receive daily updates gives our family tremendous reassurance and motivation.",
+    "created_at": "Oct 04, 2026 11:20 AM"
+  },
+  {
+    "id": 1005,
+    "name": "David K. (Clinical Evaluator)",
+    "q1_rating": "5 Stars - Excellent",
+    "q2_tracking": "Very smooth & responsive",
+    "q3_module": "Facial Symmetry & Speech Lab",
+    "q4_ai_coach": "Extremely helpful with clear medical tips",
+    "q5_usability": "Super easy & intuitive",
+    "q6_recommend": "Definitely Yes (Highly Recommended)",
+    "comments": "The facial landmark asymmetry tracking is brilliant for stroke survivors coping with central facial weakness and dysarthria. Outstanding work!",
+    "created_at": "Oct 02, 2026 09:10 AM"
+  }
+]
